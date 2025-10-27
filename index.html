@@ -1,68 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBWBNFGJ32"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WBWBNFGJ32');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recruitment Landing Page</title>
-    
+    <meta name="description" content="TP Careers - Find your perfect job opportunity with our global team">
+    <title>TP Careers</title>
+    <link rel="icon" href="TPLogo11.png" type="image/png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
+    <!-- QRious Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@latest/dist/qrious.min.js"></script>
+    
+    <!-- Additional styles for video section -->
+    <style>
+        .video-section {
+            background-color: #f8f9fa;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            display: none; /* Hidden by default */
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container video,
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Header -->
+    <!-- Header/Navbar -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="https://via.placeholder.com/150x40?text=Company+Logo" alt="Company Logo">
+                    <img src="TPLogo11.png" alt="TP Logo" height="40">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-translate="about_us">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-translate="careers">Careers</a>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="about_us">
+                                About Us
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/malaysia-site/malaysia/">TP Malaysia</a></li>
+                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/thailand-site/thailand/">TP Thailand</a></li>
+                                <li><a class="dropdown-item" href="https://vtour.cloud/mh2n0j/ae5772z1/#TPMYVR/">TP VR</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="hotJobDropdown" role="button" data-bs-toggle="dropdown">
-                                <span data-translate="opportunities">Job Opportunities 🌟</span>
+                            <a class="nav-link dropdown-toggle" href="#" id="careersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="careers">
+                                Careers
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" data-translate="hot_jobMY">Hot Job MALAYSIA🔥</a></li>
-                                <li><a class="dropdown-item" href="#" data-translate="hot_jobTH">Hot Job THAILAND🔥</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="careersDropdown">
+                                <li><a class="dropdown-item" href="https://linktr.ee/TPMY_IG" id="hot-job" data-translate="hot_jobMY">Hot Job MALAYSIA 🔥</a></li>
+                                <li><a class="dropdown-item" href="https://linktr.ee/TPTH_IG" id="hot-job" data-translate="hot_jobTH">Hot Job THAILAND 🔥</a></li>
+                                <li><a class="dropdown-item" href="https://tpmyandtpth.github.io/xRAF/" data-translate="refer_friend">Refer A Friend 🌟</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="connectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="stay_connected">
+                                Stay Connected
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="connectDropdown">
+                                <li><a class="dropdown-item" href="https://www.instagram.com/tp_malaysia/"><i class="fab fa-instagram me-2"></i> TPMY Instagram</a></li>
+                                <li><a class="dropdown-item" href="https://www.facebook.com/TPinMalaysia/"><i class="fab fa-facebook-f me-2"></i> TPMY Facebook</a></li>
+                                <li><a class="dropdown-item" href="https://www.instagram.com/tpinthailand/"><i class="fab fa-instagram me-2"></i> TPTH Instagram</a></li>
+                                <li><a class="dropdown-item" href="https://www.facebook.com/p/TPinThailand/"><i class="fab fa-facebook-f me-2"></i> TPTH Facebook</a></li>
+                                <li><a class="dropdown-item" href="https://www.linkedin.com/company//"><i class="fab fa-linkedin me-2"></i> TP LinkedIn</a></li>
+                                <li><a class="dropdown-item" href="https://www.youtube.com/@Group/"><i class="fab fa-youtube me-2"></i> TP YouTube</a></li>
+                                <li><a class="dropdown-item" href="https://www.tiktok.com/@_group/"><i class="fab fa-tiktok me-2"></i> TP TikTok</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-translate="refer_friend">Refer A Friend🌟</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-translate="stay_connected">Stay Connected</a>
+                            <a class="nav-link contact-us" href="https://www.tp.com/en-us/contact-us/" data-translate="contact_us">Contact Us</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
-                                <span data-translate="language">Language</span>
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="language">
+                                Language
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
                                 <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="zh">中文</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="jp">日本語</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="kr">한국어</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="my">Bahasa Melayu</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="th">ไทย</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="zh">Mandarin</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="jp">Japanese</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="th">Thai</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="my">Malay</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="kr">Korean</a></li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link contact-us" href="#" data-translate="contact_us">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -70,26 +130,25 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
+    <!-- Video Section - Only visible when language is Thai -->
+    <section id="thai-video-section" class="video-section" style="display: none;">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h1 class="hero-title animate-fade-in" data-translate="intro_text">
-                        We are on the hunt for the <span class="highlight">One</span>
-                    </h1>
-                    <p class="lead" data-translate="team_response">
-                        Our team will respond within <span class="highlighted-word">48 hours!</span>
-                    </p>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-video animate-fade-in">
-                        <video width="100%" height="auto" controls>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
+            <h2 class="video-title">TP Thailand - ชีวิตการทำงานที่ดีที่สุด</h2>
+            <div class="video-container">
+                <!-- Replace with your actual video source -->
+                <!-- Option 1: YouTube/Vimeo Embed -->
+                <video controls width="100%" poster="TPLogo11.png">
+                    <source src="MicrosoftTeams-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Option 2: Direct Video File (uncomment and use if you have a video file) -->
+                <!-- 
+                <video controls autoplay muted loop>
+                    <source src="your-video-file.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                -->
             </div>
         </div>
     </section>
@@ -98,111 +157,118 @@
     <section class="job-section">
         <div class="container">
             <div class="row">
-                <!-- Hot Job Column -->
-                <div class="col-lg-6 mb-4 mb-lg-0">
-                    <div class="hot-job-card">
-                        <h2 class="section-title" data-translate="hot_job_content">Hot Job Of The Week!</h2>
-                        <p data-translate="hot_job_description">
-                            Check out our <strong>"Hot Job of the Week"</strong> and join our award-winning team! 
-                            This role offers fantastic growth opportunities, competitive benefits, and the chance 
-                            to work with cutting-edge AI technology. Apply now and be part of our journey to excellence!
-                        </p>
-                        <button id="apply-btn" class="btn btn-primary w-100" data-translate="apply_now">
-                            Apply Now!
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Find Job Column -->
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="find-job-card">
                         <h2 class="section-title" data-translate="find_job">Find your perfect job!</h2>
-                        
-                        <label class="form-label" data-translate="choose_language">Choose your language</label>
-                        <select id="language-select" class="form-select">
-                            <option value="">-- Select Language --</option>
-                        </select>
-
-                        <label class="form-label" data-translate="choose_location">Choose your location</label>
-                        <select id="location-select" class="form-select">
-                            <option value="">-- Select Location --</option>
-                        </select>
-
-                        <label class="form-label" data-translate="choose_job_type">Choose your job type</label>
-                        <select id="job-type-select" class="form-select">
-                            <option value="">-- Select Job Type --</option>
-                        </select>
-
-                        <button id="generate-btn" class="btn btn-primary w-100" data-translate="generate_qr">
-                            Generate QR Code & Apply Now!
-                        </button>
+                        <div class="dropdowns">
+                            <div class="mb-4">
+                                <label for="language-select" class="form-label" data-translate="preferred_language">Preferred Language</label>
+                                <select id="language-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_language">Choose your language</option>
+                                </select>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-4">
+                                <label for="location-select" class="form-label" data-translate="choose_location">Choose Your Location</label>
+                                <select id="location-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_location">Choose your location</option>
+                                </select>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-4">
+                                <label for="job-type-select" class="form-label" data-translate="choose_job_type">Choose Your Job Type</label>
+                                <select id="job-type-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_job_type">Choose your job type</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <button id="generate-btn" class="btn btn-primary me-3" data-translate="generate_qr">Generate QR Code & Apply Now!</button>
+                            <h5 class="mb-0" data-translate="team_response">Our team will respond within <span class="highlighted-word">48 hours!</span></h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="hot-job-card">
+                        <h2 class="section-title" data-translate="hot_job_content">Hot Job Of The Week!</h2>
+                        <p data-translate="hot_job_description">Check out our <strong>"Hot Job of the Week"</strong> and join our award-winning team! This role offers fantastic growth opportunities, competitive benefits, and the chance to work with cutting-edge AI technology. Apply now and be part of our journey to excellence!</p>
+                        <button id="apply-btn" class="btn btn-primary w-100" data-translate="apply_now">Apply Now!</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- QR Code Modal -->
-    <div class="modal fade" id="qrModal" tabindex="-1" aria-hidden="true">
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© <span id="current-year"></span> TP.COM All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">#MoreTogether</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Modal -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" data-translate="preferred_language">Application Process</h5>
+                    <h5 class="modal-title" id="qrModalLabel" data-translate="scan_to_apply">Scan to Apply</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Step 1: Submit Application -->
+                    <!-- Step 1: Apply -->
                     <div class="application-step">
                         <div class="step-header">
                             <div class="step-number">1</div>
-                            <h3 class="step-title" data-translate="step_one">Submit Your Application</h3>
+                            <h4 class="step-title" data-translate="step_one">Submit Your Application</h4>
                         </div>
                         <div class="step-content">
-                            <p class="step-description" data-translate="step_one_desc">
-                                Click the link below or scan the QR code to apply for this position
-                            </p>
-                            <div class="d-flex flex-column gap-3">
-                                <a id="job-url" href="#" target="_blank" class="btn-apply" data-translate="apply_online">
-                                    <i class="fas fa-external-link-alt me-2"></i>Apply Online Now
+                            <p class="step-description" data-translate="step_one_desc">Click the link below or scan the QR code to apply for this position</p>
+                            <!-- URL on first line -->
+                            <div class="mb-3">
+                                <a id="job-url" href="#" target="_blank" rel="noopener" class="btn btn-apply d-block text-break">
+                                    <i class="fas fa-external-link-alt me-2"></i>
+                                    <span data-translate="apply_online">Apply Online Now</span>
                                 </a>
-                                
-                                <div class="qr-section">
-                                    <p class="qr-label mb-2" data-translate="or_scan">Or scan QR code:</p>
-                                    <div class="qr-container">
-                                        <canvas id="qr-code" class="qr-canvas"></canvas>
-                                        <button id="expand-qr-btn" class="btn-expand-qr">
-                                            <i class="fas fa-expand-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                            </div>
+                            <!-- QR Code on separate line -->
+                            <div class="qr-section">
+                                <p class="qr-label mb-2" data-translate="or_scan">Or scan QR</p>
+                                <canvas id="qr-code" class="qr-canvas" style="cursor: pointer;"></canvas>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Step 2: Book Interview (shown only for agent positions) -->
+                    <!-- Step 2: Book Interview (Only for agent positions) -->
                     <div id="interview-step" class="application-step" style="display: none;">
                         <div class="step-header">
                             <div class="step-number">2</div>
-                            <h3 class="step-title" data-translate="step_two">Book Your Interview</h3>
+                            <h4 class="step-title" data-translate="step_two">Book Your Interview</h4>
                         </div>
                         <div class="step-content">
-                            <p class="step-description" data-translate="step_two_desc">
-                                After submitting your application, schedule your interview at your convenience
-                            </p>
-                            <a id="interview-url" href="#" target="_blank" class="btn-interview" data-translate="book_interview">
-                                <i class="fas fa-calendar-check me-2"></i>Schedule Interview Now
+                            <p class="step-description" data-translate="step_two_desc">After submitting your application, schedule your interview at your convenience</p>
+                            <a id="interview-url" href="#" target="_blank" rel="noopener" class="btn btn-interview">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                <span data-translate="book_interview">Schedule Interview Now</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- Share Section -->
-                    <div class="share-section">
-                        <p class="share-title" data-translate="share_opportunity">Share This Opportunity</p>
+                    <div class="share-section mt-4">
+                        <h6 class="share-title" data-translate="share_via">Share Via</h6>
                         <div class="share-buttons">
-                            <button id="share-button-whatsapp" class="share-btn">
+                            <button id="share-button-whatsapp" class="share-btn" aria-label="Share on WhatsApp">
                                 <i class="fab fa-whatsapp"></i>
                             </button>
-                            <button id="share-button-line" class="share-btn">
+                            <button id="share-button-line" class="share-btn" aria-label="Share on Line">
                                 <i class="fab fa-line"></i>
                             </button>
                         </div>
@@ -212,7 +278,7 @@
         </div>
     </div>
 
-    <!-- QR Expanded Modal -->
+    <!-- QR Expanded Modal (for clicking to expand) -->
     <div class="modal fade" id="qrExpandedModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -227,20 +293,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="container">
-            <p class="mb-0">&copy; <span id="current-year"></span> Company Name. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- QRious Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-    
-    <!-- Custom JS -->
+    <!-- Custom JS (use the fixed version) -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,83 +1,58 @@
-# TP Careers Landing Page - Enhanced with Interview Booking
+# Recruitment Landing Page - Changes Made
 
-## Summary of Changes
+## ✅ Changes Applied (As Requested)
 
-I've enhanced your recruitment landing page by adding a creative two-step application process **only for agent positions**. All your existing functionality has been preserved.
+### 1. **Softer Buttons with Shadows** (styles.css)
+- Changed from solid black buttons to outlined buttons with borders
+- Added box-shadow: `0 4px 8px rgba(0, 0, 0, 0.1)` for softer appearance
+- Buttons now have white background with black border
+- Hover effect inverts colors smoothly and increases shadow
 
-## What Was Added
+### 2. **Fixed Long URL CSS Breaking** (styles.css + index.html)
+- Added `word-break: break-all` to #job-url
+- Added `overflow-wrap: break-word` to #job-url
+- Added `white-space: normal` to #job-url
+- Added Bootstrap class `text-break` in HTML
+- Long URLs now wrap properly without breaking the layout
 
-### 1. Enhanced Modal Design
-- The application modal now shows a professional two-step process
-- **Step 1**: Submit Your Application (applies to ALL positions)
-  - Primary "Apply Online Now" button (black)
-  - QR code as a secondary option (smaller, on the side)
-  
-- **Step 2**: Book Your Interview (only shows for agent positions)
-  - Green "Schedule Interview Now" button
-  - Automatically links to the correct language-specific booking URL
+### 3. **QR Code on Separate Line with Expand** (styles.css + script.js + index.html)
+- Moved QR code to separate line with border-top separator
+- Added click functionality to expand QR code
+- Clicking QR opens new modal with larger 400px QR code
+- Added cursor pointer and hover effect on QR
+- Added second modal `#qrExpandedModal` for expanded view
 
-### 2. Smart Interview Booking Logic
-The interview booking link **only appears** when users select these job types:
-- Customer Service
-- Content Moderator (Content Mod)
-- Technical Support
-- Any position with: Agent, Support, Representative, Specialist, Associate, Advisor, Care
+### 4. **Removed "48 Hours" Message** (index.html)
+- Removed the interview note div with "Our team will contact you within 48 hours"
+- Cleaned up modal structure
 
-### 3. Language-Specific Interview Links
-Each language automatically maps to the correct Outlook booking URL:
-- **Mandarin/Cantonese**: Chinese team booking link
-- **Korean**: Korea-specific interview link
-- **Japanese**: Japan-specific interview link
-- **English/Malay**: Combined EN&MY booking link
-- **Thai**: Thailand-specific booking link
+## 📝 What Was NOT Changed
 
-### 4. All Translations Added
-The new modal content is fully translated in all 6 languages:
-- English
-- Mandarin (Chinese)
-- Japanese
-- Thai
-- Malay
-- Korean
+✅ Kept all original HTML structure
+✅ Kept Thai video section (only visible for Thai language)
+✅ Kept your company logo reference (TPLogo11.png)
+✅ Kept all translation functionality
+✅ Kept all JavaScript logic
+✅ Kept JSON data structure
+✅ Kept black & white color scheme
+✅ Kept all navigation and footer
 
-## What Was NOT Changed
+## 📁 Files Included
 
-✅ All your existing code and functionality preserved
-✅ data.json integration still works
-✅ UTM parameter tracking still works
-✅ Dynamic dropdowns still work
-✅ Thai video section still works
-✅ All existing translations preserved
-✅ Hot Job of the Week feature unchanged
-✅ Same color scheme (black, white, gray)
-✅ Same clean, simple design
+1. **index.html** - Main HTML file with QR structure updated
+2. **styles.css** - Updated CSS with button improvements and QR styling
+3. **script.js** - Original JS with QR expand functionality added
+4. **data.json** - Sample JSON data you provided
 
-## Files Modified
+## 🚀 How to Use
 
-1. **index.html** - Updated modal structure to show two steps
-2. **styles.css** - Added styling for the new step indicators and buttons
-3. **script.js** - Added interview booking logic and translations
+1. Replace TPLogo11.png with your actual logo
+2. Replace MicrosoftTeams-video.mp4 with your actual Thai video
+3. Update data.json with your complete job listings
+4. All functionality remains exactly as before!
 
-## How It Works
+## 📌 Notes
 
-1. User selects language, location, and job type
-2. User clicks "Generate QR Code & Apply Now!"
-3. Modal opens showing Step 1 (application link + QR code)
-4. If job is an agent position, Step 2 automatically appears with interview booking link
-5. If job is NOT an agent position, only Step 1 shows
-
-## Testing Recommendations
-
-1. Test with agent positions (Customer Service, Content Mod, etc.) - should show 2 steps
-2. Test with non-agent positions (Sales, Management, etc.) - should show only 1 step
-3. Test each language to ensure correct interview booking links open
-4. Verify all existing functionality still works (dropdowns, UTM tracking, etc.)
-
-## Design Philosophy
-
-The design maintains your original clean, professional aesthetic with:
-- Clear visual hierarchy (numbered steps)
-- Primary action (Apply) is prominent in black
-- Secondary action (Interview) is in green to differentiate
-- QR code positioned as an alternative option, not the primary focus
-- Responsive design works on all devices
+- The Thai video only shows when Thai language is selected (original behavior preserved)
+- All your original features, tracking, and Google Analytics remain intact
+- The design stays simple and professional with black & white theme
