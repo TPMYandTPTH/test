@@ -7,7 +7,6 @@
     --dark-gray: #e0e0e0;
     --border-color: #e0e0e0;
     --transition-speed: 0.3s;
-    --success-color: #28a745;
 }
 
 body {
@@ -232,23 +231,20 @@ header {
 /* Modal Styles */
 .modal-content {
     border: none;
-    border-radius: 1rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .modal-header {
-    border-bottom: 2px solid var(--light-gray);
-    padding: 1.5rem 2rem;
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 .modal-title {
     font-weight: 700;
     color: var(--primary-color);
     font-size: 1.5rem;
-}
-
-.modal-body {
-    padding: 2rem;
 }
 
 .btn-close {
@@ -261,7 +257,38 @@ header {
     opacity: 1;
 }
 
-/* Application Steps - NEW STYLES */
+.share-buttons {
+    margin-top: 2rem;
+}
+
+.share-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+    transition: all var(--transition-speed) ease;
+    border: none;
+    font-size: 1.25rem;
+}
+
+.share-btn:hover {
+    transform: translateY(-3px) scale(1.1);
+}
+
+#share-button-whatsapp {
+    background-color: #25D366;
+    color: white;
+}
+
+#share-button-line {
+    background-color: #00B900;
+    color: white;
+}
+
+/* ============ NEW: Enhanced Modal Styles for Two-Step Process ============ */
 .application-step {
     background-color: var(--light-gray);
     border-radius: 0.75rem;
@@ -314,7 +341,6 @@ header {
     font-size: 0.95rem;
 }
 
-/* Action Buttons - NEW STYLES */
 .btn-apply,
 .btn-interview {
     display: inline-flex;
@@ -341,7 +367,7 @@ header {
 }
 
 .btn-interview {
-    background-color: var(--success-color);
+    background-color: #28a745;
     color: var(--secondary-color);
 }
 
@@ -352,7 +378,6 @@ header {
     box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
-/* QR Code Styling - NEW STYLES */
 .qr-canvas {
     max-width: 120px;
     height: auto;
@@ -368,10 +393,9 @@ header {
     font-weight: 600;
 }
 
-/* Interview Note - NEW STYLES */
 .interview-note {
     background-color: var(--secondary-color);
-    border-left: 4px solid var(--success-color);
+    border-left: 4px solid #28a745;
     padding: 0.75rem 1rem;
     border-radius: 0.25rem;
     font-size: 0.9rem;
@@ -379,10 +403,9 @@ header {
 }
 
 .interview-note i {
-    color: var(--success-color);
+    color: #28a745;
 }
 
-/* Share Section - UPDATED STYLES */
 .share-section {
     border-top: 2px solid var(--light-gray);
     padding-top: 1.5rem;
@@ -395,40 +418,7 @@ header {
     margin-bottom: 1rem;
     font-size: 1rem;
 }
-
-.share-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
-.share-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-speed) ease;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.share-btn:hover {
-    transform: translateY(-3px) scale(1.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-#share-button-whatsapp {
-    background-color: #25D366;
-    color: white;
-}
-
-#share-button-line {
-    background-color: #00B900;
-    color: white;
-}
+/* ============ END NEW STYLES ============ */
 
 /* Footer */
 footer {
@@ -479,10 +469,6 @@ footer {
         padding-left: 0;
         margin-top: 1rem;
     }
-
-    .step-header {
-        flex-direction: row;
-    }
 }
 
 @media (max-width: 768px) {
@@ -505,14 +491,6 @@ footer {
     .d-flex.align-items-center {
         flex-direction: column;
         align-items: flex-start;
-    }
-
-    .modal-body {
-        padding: 1.5rem;
-    }
-
-    .application-step {
-        padding: 1rem;
     }
 
     .btn-apply,
@@ -554,7 +532,7 @@ footer {
 
 /* Print Styles */
 @media print {
-    header, footer, .hero-video, .share-section {
+    header, footer, .hero-video {
         display: none;
     }
     
