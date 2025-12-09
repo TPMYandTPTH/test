@@ -144,7 +144,7 @@ ${bonusCardsEN}
 </ul>
 </div>
 
-<p class="terms-footer">Last updated: December 2024</p>
+<p class="terms-footer">Last updated: December 2025</p>
 </div>` + termsStyles;
 
 const termsContentJA = `<div class="terms-container">
@@ -217,7 +217,7 @@ ${bonusCardsJA}
 </ul>
 </div>
 
-<p class="terms-footer">最終更新日：2024年12月</p>
+<p class="terms-footer">最終更新日：2025年12月</p>
 </div>` + termsStyles;
 
 const termsContentKO = `<div class="terms-container">
@@ -287,7 +287,7 @@ ${bonusCardsKO}
 </ul>
 </div>
 
-<p class="terms-footer">최종 업데이트：2024년 12월</p>
+<p class="terms-footer">최종 업데이트：2025년 12월</p>
 </div>` + termsStyles;
 
 const termsContentZHCN = `<div class="terms-container">
@@ -359,7 +359,7 @@ ${bonusCardsZHCN}
 </ul>
 </div>
 
-<p class="terms-footer">最后更新：2024年12月</p>
+<p class="terms-footer">最后更新：2025年12月</p>
 </div>` + termsStyles;
 
 const termsContentZHHK = `<div class="terms-container">
@@ -430,7 +430,7 @@ ${bonusCardsZHHK}
 </ul>
 </div>
 
-<p class="terms-footer">最後更新：2024年12月</p>
+<p class="terms-footer">最後更新：2025年12月</p>
 </div>` + termsStyles;
 
 const translations = {
