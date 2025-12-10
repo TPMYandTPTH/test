@@ -5,12 +5,12 @@ const termsStyles = `
 .terms-intro { background: #f8f9fa; padding: 15px; border-left: 4px solid #000; margin-bottom: 25px; border-radius: 4px; }
 .terms-section { margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .terms-section-title { color: #1a1a1a; font-weight: 700; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e9ecef; display: flex; align-items: center; gap: 10px; }
-.terms-section-title i { color: #FFD700; }
+.terms-section-title i { color: #ff5c00; }
 .bonus-card { border-radius: 12px; padding: 20px; margin-bottom: 20px; color: white; box-shadow: 0 8px 16px rgba(0,0,0,0.2); transition: transform 0.3s ease; }
 .bonus-card:hover { transform: translateY(-5px); }
-.bonus-card.johor-bonus { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #1a1a1a; }
+.bonus-card.johor-bonus { background: linear-gradient(135deg, #ff5c00 0%, #FF8C00 100%); color: #1a1a1a; }
 .bonus-card.standard-bonus { background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%); }
-.bonus-card.interpreter-bonus { background: linear-gradient(135deg, #010066 0%, #1a1a6e 100%); }
+.bonus-card.interpreter-bonus { background: linear-gradient(135deg, #3047b0 0%, #1a2a6e 100%); }
 .bonus-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
 .bonus-header h6 { margin: 0; font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 10px; }
 .total-badge { background: rgba(255,255,255,0.25); padding: 8px 20px; border-radius: 25px; font-weight: 700; border: 2px solid rgba(255,255,255,0.5); }
@@ -29,7 +29,7 @@ const termsStyles = `
 .terms-list li { margin-bottom: 12px; line-height: 1.7; }
 .terms-sublist { margin-top: 10px; padding-left: 25px; list-style-type: circle; }
 .terms-sublist li { margin-bottom: 8px; }
-.privacy-notice { background: #f8f9fa; border-left: 4px solid #FFD700; padding: 15px; margin-top: 15px; border-radius: 4px; }
+.privacy-notice { background: #f8f9fa; border-left: 4px solid #ff5c00; padding: 15px; margin-top: 15px; border-radius: 4px; }
 .privacy-notice p { margin: 0; }
 .terms-footer { text-align: center; color: #6c757d; font-size: 0.9rem; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e9ecef; }
 .terms-container a { color: #010066; text-decoration: none; font-weight: 600; }
@@ -144,7 +144,7 @@ ${bonusCardsEN}
 </ul>
 </div>
 
-<p class="terms-footer">Last updated: December 2025</p>
+<p class="terms-footer">Last updated: December 2024</p>
 </div>` + termsStyles;
 
 const termsContentJA = `<div class="terms-container">
@@ -217,7 +217,7 @@ ${bonusCardsJA}
 </ul>
 </div>
 
-<p class="terms-footer">最終更新日：2025年12月</p>
+<p class="terms-footer">最終更新日：2024年12月</p>
 </div>` + termsStyles;
 
 const termsContentKO = `<div class="terms-container">
@@ -287,7 +287,7 @@ ${bonusCardsKO}
 </ul>
 </div>
 
-<p class="terms-footer">최종 업데이트：2025년 12월</p>
+<p class="terms-footer">최종 업데이트：2024년 12월</p>
 </div>` + termsStyles;
 
 const termsContentZHCN = `<div class="terms-container">
@@ -359,7 +359,7 @@ ${bonusCardsZHCN}
 </ul>
 </div>
 
-<p class="terms-footer">最后更新：2025年12月</p>
+<p class="terms-footer">最后更新：2024年12月</p>
 </div>` + termsStyles;
 
 const termsContentZHHK = `<div class="terms-container">
@@ -430,7 +430,7 @@ ${bonusCardsZHHK}
 </ul>
 </div>
 
-<p class="terms-footer">最後更新：2025年12月</p>
+<p class="terms-footer">最後更新：2024年12月</p>
 </div>` + termsStyles;
 
 const translations = {
