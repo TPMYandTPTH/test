@@ -1,192 +1,284 @@
+// ============ NEW: Interview booking logic ============
+const interviewLinks = {
+    'Mandarin': 'https://outlook.office.com/book/Chinese@teleperformance.onmicrosoft.com/s/7lYQUtBQp0O-ps7TnPavzA2?ismsaljsauthenabled',
+    'Cantonese': 'https://outlook.office.com/book/Chinese@teleperformance.onmicrosoft.com/s/MV4FDjJs7EeuSYmAOiz6zQ2?ismsaljsauthenabled',
+    'Korean': 'https://outlook.office.com/book/TeleperformanceMalaysiaThailandinterviews@teleperformance.onmicrosoft.com/s/VOKIhr5rN0CbMRcvzrUyIw2?ismsaljsauthenabled',
+    'Japanese': 'https://outlook.office.com/book/TeleperformanceMalaysiaThailandinterviews@teleperformance.onmicrosoft.com/s/G_rYtA5Pg0ebNjlKhHtTGg2?ismsaljsauthenabled',
+    'English': 'https://outlook.office.com/book/EnglishMalay@teleperformance.onmicrosoft.com/s/1VrPYr8cmESlwvf5rfq-Og2?ismsaljsauthenabled',
+    'Malay': 'https://outlook.office.com/book/EnglishMalay@teleperformance.onmicrosoft.com/s/1VrPYr8cmESlwvf5rfq-Og2?ismsaljsauthenabled',
+    'Thai': 'https://outlook.office.com/book/TeleperformanceMalaysiaSupportHiring@teleperformance.onmicrosoft.com/s/8uzkPuNYJEWfdPhpfRoQag2?ismsaljsauthenabled'
+};
+
+const agentJobKeywords = ['customer service', 'content mod', 'content moderator', 'agent', 'support', 'representative', 'specialist', 'associate', 'advisor', 'care'];
+
+function isAgentPosition(jobType) {
+    if (!jobType) return false;
+    return agentJobKeywords.some(keyword => jobType.toLowerCase().includes(keyword));
+}
+
+function getInterviewLink(languageOption) {
+    return interviewLinks[languageOption] || interviewLinks['English'];
+}
+// ============ END NEW CODE ============
+
 document.addEventListener('DOMContentLoaded', function() {
-    const elements = {
-        pageLangSelect: document.getElementById('page-lang-select'),
-        fullName: document.getElementById('full-name'),
-        phoneNumber: document.getElementById('phone-number'),
-        email: document.getElementById('email'),
-        jobLangSelect: document.getElementById('job-lang-select'),
-        locationSelect: document.getElementById('location-select'),
-        consentCheckbox: document.getElementById('consent-checkbox'),
-        step1: document.getElementById('step1'),
-        step2: document.getElementById('step2'),
-        nextBtn: document.getElementById('next-btn'),
-        backBtn: document.getElementById('back-btn'),
-        referralLink: document.getElementById('referral-link'),
-        copyBtn: document.getElementById('copy-btn'),
-        qrCodeCanvas: document.getElementById('qr-code-canvas'),
-        shareWhatsapp: document.getElementById('share-whatsapp'),
-        shareLine: document.getElementById('share-line'),
-        shareFacebook: document.getElementById('share-facebook'),
-        locationSocialLinks: document.getElementById('location-social-links'),
-        termsModal: document.getElementById('termsModal'),
-        termsContent: document.getElementById('termsContent'),
-        mainCountdownAmount: document.getElementById('mainCountdownAmount')
-    };
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    let currentLanguage = 'en';
-    let currentLocation = '';
-    let jobData = [];
-
-    // Main page countdown configuration
-    const mainCountdownConfig = {
-        startAmount: 20000,
-        endAmount: 20000,
-        duration: 30000,
-        updateInterval: 2000
-    };
-
-    // Create phone hint element
-    const phoneHint = document.createElement('div');
-    phoneHint.className = 'phone-hint mt-1 small text-muted';
-    elements.phoneNumber.parentNode.insertBefore(phoneHint, elements.phoneNumber.nextSibling);
-
-    function formatMoney(amount) {
-        return 'RM' + Math.floor(amount).toLocaleString('en-US');
-    }
-
-    function startMainCountdown() {
-        function addVisualEffects() {
-            elements.mainCountdownAmount.classList.add('pulse');
-            
-            setTimeout(() => {
-                elements.mainCountdownAmount.classList.remove('pulse');
-            }, 800);
-            
-            setTimeout(addVisualEffects, 8000);
+    // Language translation functionality
+    const languages = {
+        en: {
+            about_us: "About Us",
+            careers: "Careers",
+            hot_jobMY: "Hot Job MALAYSIA🔥",
+            hot_jobTH: "Hot Job THAILAND🔥",
+            opportunities: "Job Opportunities 🌟",
+            refer_friend: "Refer A Friend🌟",
+            stay_connected: "Stay Connected",
+            contact_us: "Contact Us",
+            language: "Language",
+            language_pages: "Language-Specific Pages",
+            language_pages_desc: "Explore our dedicated landing pages for each language",
+            find_job: "Find your perfect job!",
+            choose_language: "Choose your language",
+            choose_location: "Choose your location",
+            choose_job_type: "Choose your job type",
+            generate_qr: "Generate QR Code & Apply Now!",
+            intro_text: "We are on the hunt for the <span class='highlight'>One</span>",
+            team_response: "Our team will respond within <span class='highlighted-word'>48 hours!</span>",
+            share_via: "Share Via",
+            preferred_language: "Preferred Language",
+            scan_to_apply: "Scan to Apply",
+            select_all_options: "Please select all options",
+            no_job_found: "No matching job found",
+            step_one: "Submit Your Application",
+            step_one_desc: "Click the link below or scan the QR code to apply for this position",
+            apply_online: "Apply Online Now",
+            or_scan: "Or scan QR",
+            step_two: "Book Your Interview",
+            step_two_desc: "After submitting your application, schedule your interview at your convenience",
+            book_interview: "Schedule Interview Now",
+            interview_note: "Our team will contact you within 48 hours of your application",
+            share_opportunity: "Share This Opportunity"
+        },
+        zh: {
+            about_us: "关于我们",
+            careers: "职业机会",
+            hot_jobMY: "热门职位 马来西亚🔥",
+            hot_jobTH: "热门职位 泰国🔥",
+            opportunities: "机会 🌟",
+            refer_friend: "介绍个朋友🌟",
+            stay_connected: "保持联系",
+            contact_us: "联系我们",
+            language: "语言",
+            language_pages: "语言专属页面",
+            language_pages_desc: "浏览我们为各语言专门设计的招聘页面",
+            find_job: "找到你的理想工作！",
+            choose_language: "选择语言",
+            choose_location: "选择地点",
+            choose_job_type: "选择工作类型",
+            generate_qr: "生成二维码并立即申请！",
+            intro_text: "我们正在寻找<span class='highlight'>合适的人选</span>",
+            team_response: "我们的团队将在<span class='highlighted-word'>48小时内</span>回复！",
+            share_via: "分享方式",
+            preferred_language: "首选语言",
+            scan_to_apply: "扫描申请",
+            select_all_options: "请选择所有选项",
+            no_job_found: "未找到匹配的工作",
+            step_one: "提交您的申请",
+            step_one_desc: "点击下方链接或扫描二维码申请此职位",
+            apply_online: "立即在线申请",
+            or_scan: "或扫描二维码",
+            step_two: "预约面试",
+            step_two_desc: "提交申请后，请按您的方便时间安排面试",
+            book_interview: "立即预约面试",
+            interview_note: "我们的团队将在您申请后48小时内与您联系",
+            share_opportunity: "分享此机会"
+        },
+        jp: {
+            about_us: "会社概要",
+            careers: "採用情報",
+            hot_jobMY: "ホットジョブ マレーシア🔥",
+            hot_jobTH: "ホットジョブ タイ🔥",
+            opportunities: "求人情報 🌟",
+            refer_friend: "友人を紹介🌟",
+            stay_connected: "つながりを保つ",
+            contact_us: "お問い合わせ",
+            language: "言語",
+            language_pages: "言語別ページ",
+            language_pages_desc: "各言語専用のランディングページをご覧ください",
+            find_job: "あなたにぴったりの仕事を見つけましょう！",
+            choose_language: "言語を選択",
+            choose_location: "場所を選択",
+            choose_job_type: "仕事の種類を選択",
+            generate_qr: "QRコードを生成して今すぐ申し込む！",
+            intro_text: "私たちは<span class='highlight'>適任者</span>を探しています",
+            team_response: "私たちのチームは<span class='highlighted-word'>48時間以内</span>に返信します！",
+            share_via: "共有",
+            preferred_language: "希望言語",
+            scan_to_apply: "スキャンして応募",
+            select_all_options: "すべてのオプションを選択してください",
+            no_job_found: "一致する仕事が見つかりません",
+            step_one: "応募書類を提出",
+            step_one_desc: "下のリンクをクリックするか、QRコードをスキャンしてこのポジションに応募してください",
+            apply_online: "今すぐオンラインで応募",
+            or_scan: "またはQRをスキャン",
+            step_two: "面接を予約",
+            step_two_desc: "応募後、ご都合の良い時間に面接を予約してください",
+            book_interview: "今すぐ面接を予約",
+            interview_note: "チームは応募後48時間以内にご連絡いたします",
+            share_opportunity: "この機会を共有"
+        },
+        kr: {
+            about_us: "회사 소개",
+            careers: "채용",
+            hot_jobMY: "핫한 직업 말레이시아🔥",
+            hot_jobTH: "핫한 직업 태국🔥",
+            opportunities: "기회 🌟",
+            refer_friend: "친구 추천🌟",
+            stay_connected: "연결 유지",
+            contact_us: "문의하기",
+            language: "언어",
+            language_pages: "언어별 페이지",
+            language_pages_desc: "각 언어를 위한 전용 랜딩 페이지를 살펴보세요",
+            find_job: "완벽한 직업을 찾으세요!",
+            choose_language: "언어 선택",
+            choose_location: "위치 선택",
+            choose_job_type: "직무 유형 선택",
+            generate_qr: "QR 코드 생성 및 지금 지원!",
+            intro_text: "우리는 <span class='highlight'>적임자</span>를 찾고 있습니다",
+            team_response: "우리 팀은 <span class='highlighted-word'>48시간</span> 이내에 답변드립니다!",
+            share_via: "공유하기",
+            preferred_language: "선호 언어",
+            scan_to_apply: "스캔하여 지원",
+            select_all_options: "모든 옵션을 선택하세요",
+            no_job_found: "일치하는 직업을 찾을 수 없음",
+            step_one: "지원서 제출",
+            step_one_desc: "아래 링크를 클릭하거나 QR 코드를 스캔하여 이 포지션에 지원하세요",
+            apply_online: "지금 온라인으로 지원",
+            or_scan: "또는 QR 스캔",
+            step_two: "면접 예약",
+            step_two_desc: "지원서를 제출한 후 편리한 시간에 면접을 예약하세요",
+            book_interview: "지금 면접 예약",
+            interview_note: "저희 팀이 지원 후 48시간 이내에 연락드립니다",
+            share_opportunity: "이 기회 공유"
+        },
+        my: {
+            about_us: "Tentang Kami",
+            careers: "Peluang Kerjaya",
+            hot_jobMY: "Kerja Hangat MALAYSIA🔥",
+            hot_jobTH: "Kerja Hangat THAILAND🔥",
+            opportunities: "Peluang Pekerjaan 🌟",
+            refer_friend: "Rakan Rujuk🌟",
+            stay_connected: "Terus Berhubung",
+            contact_us: "Hubungi Kami",
+            language: "Bahasa",
+            language_pages: "Halaman Khusus Bahasa",
+            language_pages_desc: "Terokai halaman khusus kami untuk setiap bahasa",
+            find_job: "Cari pekerjaan sempurna anda!",
+            choose_language: "Pilih bahasa anda",
+            choose_location: "Pilih lokasi anda",
+            choose_job_type: "Pilih jenis pekerjaan anda",
+            generate_qr: "Hasilkan Kod QR & Mohon Sekarang!",
+            intro_text: "Kami mencari <span class='highlight'>Yang Satu</span>",
+            team_response: "Pasukan kami akan membalas dalam masa <span class='highlighted-word'>48 jam!</span>",
+            share_via: "Kongsi Melalui",
+            preferred_language: "Bahasa Pilihan",
+            scan_to_apply: "Imbas untuk Memohon",
+            select_all_options: "Sila pilih semua pilihan",
+            no_job_found: "Tiada pekerjaan yang sepadan ditemui",
+            step_one: "Hantar Permohonan Anda",
+            step_one_desc: "Klik pautan di bawah atau imbas kod QR untuk memohon jawatan ini",
+            apply_online: "Mohon Dalam Talian Sekarang",
+            or_scan: "Atau imbas QR",
+            step_two: "Tempah Temu Duga Anda",
+            step_two_desc: "Selepas menghantar permohonan, jadualkan temu duga anda mengikut keselesaan anda",
+            book_interview: "Jadualkan Temu Duga Sekarang",
+            interview_note: "Pasukan kami akan menghubungi anda dalam masa 48 jam selepas permohonan",
+            share_opportunity: "Kongsi Peluang Ini"
+        },
+        th: {
+            about_us: "เกี่ยวกับเรา",
+            careers: "อาชีพ",
+            hot_jobMY: "งานร้อนแรง มาเลเซีย🔥",
+            hot_jobTH: "งานร้อนแรง ไทย🔥",
+            opportunities: "โอกาสในการทำงาน 🌟",
+            refer_friend: "แนะนำเพื่อน🌟",
+            stay_connected: "ติดต่อกันไว้",
+            contact_us: "ติดต่อเรา",
+            language: "ภาษา",
+            language_pages: "หน้าเฉพาะภาษา",
+            language_pages_desc: "สำรวจหน้าแลนดิ้งเฉพาะของเราสำหรับแต่ละภาษา",
+            find_job: "หางานในฝันของคุณ!",
+            choose_language: "เลือกภาษาของคุณ",
+            choose_location: "เลือกสถานที่ของคุณ",
+            choose_job_type: "เลือกประเภทงานของคุณ",
+            generate_qr: "สร้าง QR Code และสมัครเลย!",
+            intro_text: "เรากำลังตามหา<span class='highlight'>คนที่ใช่</span>",
+            team_response: "ทีมงานของเราจะตอบกลับภายใน<span class='highlighted-word'>48 ชั่วโมง!</span>",
+            share_via: "แชร์ผ่าน",
+            preferred_language: "ภาษาที่ต้องการ",
+            scan_to_apply: "สแกนเพื่อสมัคร",
+            select_all_options: "กรุณาเลือกตัวเลือกทั้งหมด",
+            no_job_found: "ไม่พบงานที่ตรงกับเงื่อนไข",
+            step_one: "ส่งใบสมัคร",
+            step_one_desc: "คลิกลิงก์ด้านล่างหรือสแกน QR Code เพื่อสมัครตำแหน่งนี้",
+            apply_online: "สมัครออนไลน์ทันที",
+            or_scan: "หรือสแกน QR",
+            step_two: "จองการสัมภาษณ์",
+            step_two_desc: "หลังจากส่งใบสมัคร กำหนดเวลาสัมภาษณ์ตามความสะดวกของคุณ",
+            book_interview: "จองการสัมภาษณ์ทันที",
+            interview_note: "ทีมของเราจะติดต่อคุณภายใน 48 ชั่วโมงหลังจากการสมัคร",
+            share_opportunity: "แชร์โอกาสนี้"
         }
-        
-        setTimeout(addVisualEffects, 5000);
+    };
+
+    // Initialize variables
+    let jsonData = [];
+    const languageSelect = document.getElementById('language-select');
+    const locationSelect = document.getElementById('location-select');
+    const jobTypeSelect = document.getElementById('job-type-select');
+    const generateBtn = document.getElementById('generate-btn');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Get current language from URL
+    function getLanguageFromUrl() {
+        return urlParams.get('lang') || 'en';
     }
 
-    function showWelcomePopup() {
-        const popup = document.createElement('div');
-        popup.className = 'welcome-popup';
-        
-        // Logo section
-        const logo = document.createElement('img');
-        logo.src = 'TPLogo11.png';
-        logo.alt = 'Teleperformance Logo';
-        logo.className = 'welcome-logo';
-        
-        // TP in Johor big text
-        const johorTitle = document.createElement('div');
-        johorTitle.className = 'welcome-johor-title';
-        johorTitle.innerHTML = 'TP in <span class="johor-highlight">Johor</span>';
-        
-        // Create money countdown container
-        const countdownContainer = document.createElement('div');
-        countdownContainer.className = 'welcome-countdown-container';
-        
-        const countdownTitle = document.createElement('div');
-        countdownTitle.className = 'welcome-countdown-title';
-        countdownTitle.textContent = 'Total Rewards Available';
-        
-        const moneyCountdown = document.createElement('div');
-        moneyCountdown.className = 'welcome-money-countdown';
-        moneyCountdown.id = 'welcomeMoneyCountdown';
-        moneyCountdown.textContent = 'RM30,000';
-        
-        const hurryMessage = document.createElement('div');
-        hurryMessage.className = 'welcome-hurry-message';
-        hurryMessage.textContent = 'Hurry! The rewards are disappearing fast! 🚀';
-        
-        countdownContainer.appendChild(countdownTitle);
-        countdownContainer.appendChild(moneyCountdown);
-        countdownContainer.appendChild(hurryMessage);
-        
-        // Multi-language welcome messages at the bottom
-        const messageContainer = document.createElement('div');
-        messageContainer.className = 'welcome-message-container';
-        
-        const welcomeMessages = [
-            translations.en.welcomeMessage,
-            translations.ja.welcomeMessage,
-            translations.ko.welcomeMessage,
-            translations['zh-CN'].welcomeMessage,
-            translations['zh-HK'].welcomeMessage
-        ];
-        
-        welcomeMessages.forEach((msg, index) => {
-            const message = document.createElement('div');
-            message.className = 'welcome-message-line';
-            message.textContent = msg;
-            message.style.animationDelay = `${index * 0.3}s`;
-            messageContainer.appendChild(message);
-        });
-        
-        popup.appendChild(logo);
-        popup.appendChild(johorTitle);
-        popup.appendChild(countdownContainer);
-        popup.appendChild(messageContainer);
-        document.body.appendChild(popup);
-        
-        // Start the countdown animation in popup only
-        const moneyElement = document.getElementById('welcomeMoneyCountdown');
-        const startAmount = 30000;
-        const endAmount = 20000;
-        let currentAmount = startAmount;
-        const duration = 3000;
-        const startTime = Date.now();
-        
-        function updateCountdown() {
-            const elapsed = Date.now() - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            const easedProgress = 1 - Math.pow(1 - progress, 3);
-            
-            currentAmount = startAmount - (startAmount - endAmount) * easedProgress;
-            
-            moneyElement.textContent = formatMoney(currentAmount);
-            
-            moneyElement.classList.add('pumping');
-            setTimeout(() => {
-                moneyElement.classList.remove('pumping');
-            }, 500);
-            
-            if (Math.random() < 0.02) {
-                const hurryMessages = [
-                    "Hurry! The rewards are disappearing fast! 🚀",
-                    "Don't wait - the amount is dropping! ⏳",
-                    "Limited rewards available! 💰",
-                    "Join now before it's too late! 🔥",
-                    "Others are claiming their rewards - don't miss out! 👥"
-                ];
-                hurryMessage.textContent = hurryMessages[Math.floor(Math.random() * hurryMessages.length)];
-            }
-            
-            if (progress < 1) {
-                requestAnimationFrame(updateCountdown);
+    // Toggle video section based on language
+    function toggleVideoSection(language) {
+        const videoSection = document.getElementById('thai-video-section');
+        if (videoSection) {
+            if (language === 'th') {
+                videoSection.style.display = 'block';
             } else {
-                const finalMessages = [
-                    "Last chance to claim your rewards!",
-                    "Time's almost up! Don't miss out!",
-                    "Final amounts remaining - act now!",
-                    "Rewards are going fast - join today!"
-                ];
-                hurryMessage.textContent = finalMessages[Math.floor(Math.random() * finalMessages.length)];
+                videoSection.style.display = 'none';
             }
         }
-        
-        updateCountdown();
-        
-        // Hide after 5 seconds
-        setTimeout(() => {
-            popup.classList.add('hidden');
-            setTimeout(() => {
-                popup.remove();
-                startMainCountdown();
-            }, 1000);
-        }, 5000);
     }
 
-    function init() {
-        showWelcomePopup();
-        loadJobData();
-        setupEventListeners();
-        updatePageContent();
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+    // Update content based on language
+    function updateContent(language) {
+        const langContent = languages[language] || languages['en'];
+        
+        // Update all elements with data-translate attribute
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (langContent[key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'SELECT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = langContent[key];
+                } else {
+                    element.innerHTML = langContent[key];
+                }
+            }
+        });
+
+        // Toggle video section visibility
+        toggleVideoSection(language);
     }
 
+    // Load job data from JSON file
     function loadJobData() {
         fetch('data.json')
             .then(response => {
@@ -194,348 +286,394 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                jobData = data;
-                populateJobDropdowns();
-                // Set default values after data is loaded
-                setDefaultValues();
+                jsonData = data;
+                populateInitialDropdowns();
             })
             .catch(error => {
                 console.error('Error loading job data:', error);
-                alert(translations[currentLanguage].loadError);
+                alert(languages[getLanguageFromUrl()]?.no_job_found || 'Failed to load job data. Using default data instead.');
+                // Fallback to default data
+                jsonData = [
+                    {
+                        "Positions": "Customer Success Specialist",
+                        "Language": "Japanese",
+                        "Location": "Penang",
+                        "Evergreen title": "Customer Success Specialist - Japanese - Penang",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49421/customer-success-specialist---japanese---penang/job?mode=job&iis=LandingPage&iisn="
+                    },
+                    {
+                        "Positions": "Customer Success Specialist",
+                        "Language": "Korean",
+                        "Location": "Penang",
+                        "Evergreen title": "Customer Success Specialist - Korean - Penang",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49422/customer-success-specialist---korean---penang/job?mode=job&iis=LandingPage&iisn="
+                    },
+                    {
+                        "Positions": "Customer Service Representative",
+                        "Language": "English",
+                        "Location": "Kuala Lumpur",
+                        "Evergreen title": "Customer Service Representative - English - KL",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49423/customer-service-representative---english---kl/job?mode=job&iis=LandingPage&iisn="
+                    },
+                    {
+                        "Positions": "Technical Support Specialist",
+                        "Language": "Mandarin",
+                        "Location": "Penang",
+                        "Evergreen title": "Technical Support Specialist - Mandarin - Penang",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49424/technical-support-specialist---mandarin---penang/job?mode=job&iis=LandingPage&iisn="
+                    },
+                    {
+                        "Positions": "Customer Service Representative",
+                        "Language": "Thai",
+                        "Location": "Bangkok",
+                        "Evergreen title": "Customer Service Representative - Thai - Bangkok",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49425/customer-service-representative---thai---bangkok/job?mode=job&iis=LandingPage&iisn="
+                    },
+                    {
+                        "Positions": "Sales Consultant",
+                        "Language": "Malay",
+                        "Location": "Kuala Lumpur",
+                        "Evergreen title": "Sales Consultant - Malay - KL",
+                        "Evergreen link": "https://careerseng-teleperformance.icims.com/jobs/49426/sales-consultant---malay---kl/job?mode=job&iis=LandingPage&iisn="
+                    }
+                ];
+                populateInitialDropdowns();
             });
     }
 
-    function populateJobDropdowns() {
-        const languages = [...new Set(jobData.map(job => job.Language))];
-        const locations = [...new Set(jobData.map(job => job.Location))];
+    // Initially populate dropdowns with all options
+    function populateInitialDropdowns() {
+        const currentPageLang = getLanguageFromUrl();
+        
+        // Clear existing options
+        languageSelect.innerHTML = '<option value="" disabled selected>' + (languages[currentPageLang]?.choose_language || 'Choose your language') + '</option>';
+        locationSelect.innerHTML = '<option value="" disabled selected>' + (languages[currentPageLang]?.choose_location || 'Choose your location') + '</option>';
+        jobTypeSelect.innerHTML = '<option value="" disabled selected>' + (languages[currentPageLang]?.choose_job_type || 'Choose your job type') + '</option>';
 
-        elements.jobLangSelect.innerHTML = '';
-        addOption(elements.jobLangSelect, '', translations[currentLanguage].selectOption, true, true);
-        languages.forEach(lang => {
-            addOption(elements.jobLangSelect, lang, lang);
+        // Get all unique languages and locations
+        const allLanguages = [...new Set(jsonData.map(item => item.Language))];
+        const allLocations = [...new Set(jsonData.map(item => item.Location))];
+
+        // Populate language dropdown
+        allLanguages.forEach(lang => {
+            const option = document.createElement('option');
+            option.value = lang;
+            option.textContent = lang;
+            languageSelect.appendChild(option);
         });
 
-        elements.locationSelect.innerHTML = '';
-        addOption(elements.locationSelect, '', translations[currentLanguage].selectOption, true, true);
-        locations.forEach(loc => {
-            addOption(elements.locationSelect, loc, loc);
+        // Populate location dropdown
+        allLocations.forEach(loc => {
+            const option = document.createElement('option');
+            option.value = loc;
+            option.textContent = loc;
+            locationSelect.appendChild(option);
         });
-    }
-
-    function addOption(select, value, text, disabled = false, selected = false) {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = text;
-        option.disabled = disabled;
-        option.selected = selected;
-        select.appendChild(option);
-    }
-
-    // NEW FUNCTION: Set default values to Mandarin and Johor
-    function setDefaultValues() {
-        // Set Job Language to Mandarin
-        elements.jobLangSelect.value = 'Mandarin';
-        
-        // Update locations based on Mandarin selection
-        updateLocationsByLanguage();
-        
-        // Set Working Location to Johor
-        elements.locationSelect.value = 'Johor';
-        
-        // Validate form after setting defaults
-        validateForm();
     }
 
     // Update locations based on selected language
-    function updateLocationsByLanguage() {
-        const selectedLanguage = elements.jobLangSelect.value;
+    function updateLocations() {
+        const selectedLanguage = languageSelect.value;
+        const currentLocation = locationSelect.value;
         
-        elements.locationSelect.value = '';
-        elements.locationSelect.classList.remove('is-invalid');
+        // Filter locations based on selected language
+        const filteredLocations = selectedLanguage 
+            ? [...new Set(jsonData
+                .filter(item => item.Language === selectedLanguage)
+                .map(item => item.Location))]
+            : [...new Set(jsonData.map(item => item.Location))];
         
-        if (!selectedLanguage) {
-            const locations = [...new Set(jobData.map(job => job.Location))];
-            elements.locationSelect.innerHTML = '';
-            addOption(elements.locationSelect, '', translations[currentLanguage].selectOption, true, true);
-            locations.forEach(loc => {
-                addOption(elements.locationSelect, loc, loc);
-            });
-            return;
-        }
+        // Update location dropdown
+        updateDropdown(locationSelect, filteredLocations, currentLocation);
         
-        const availableLocations = [...new Set(
-            jobData
-                .filter(job => job.Language === selectedLanguage)
-                .map(job => job.Location)
-        )];
-        
-        elements.locationSelect.innerHTML = '';
-        addOption(elements.locationSelect, '', translations[currentLanguage].selectOption, true, true);
-        availableLocations.forEach(loc => {
-            addOption(elements.locationSelect, loc, loc);
-        });
+        // Update job types based on new selections
+        updateJobTypes();
     }
 
-    function updatePageContent() {
-        const translation = translations[currentLanguage] || translations.en;
+    // Update languages based on selected location
+    function updateLanguages() {
+        const selectedLocation = locationSelect.value;
+        const currentLanguage = languageSelect.value;
         
-        document.querySelectorAll('[data-translate]').forEach(el => {
-            const key = el.getAttribute('data-translate');
-            if (translation[key]) {
-                if (el.tagName === 'INPUT' && el.type === 'button') {
-                    el.value = translation[key];
-                } else {
-                    el.textContent = translation[key];
+        // Filter languages based on selected location
+        const filteredLanguages = selectedLocation 
+            ? [...new Set(jsonData
+                .filter(item => item.Location === selectedLocation)
+                .map(item => item.Language))]
+            : [...new Set(jsonData.map(item => item.Language))];
+        
+        // Update language dropdown
+        updateDropdown(languageSelect, filteredLanguages, currentLanguage);
+        
+        // Update job types based on new selections
+        updateJobTypes();
+    }
+
+    // Helper function to update a dropdown while preserving current selection if possible
+    function updateDropdown(dropdown, options, currentValue) {
+        const currentPageLang = getLanguageFromUrl();
+        const currentSelected = dropdown.value;
+        dropdown.innerHTML = '';
+        
+        // Add default option
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        defaultOption.textContent = dropdown.id === 'language-select' 
+            ? (languages[currentPageLang]?.choose_language || 'Choose your language')
+            : (languages[currentPageLang]?.choose_location || 'Choose your location');
+        dropdown.appendChild(defaultOption);
+        
+        // Add all options
+        options.forEach(option => {
+            const opt = document.createElement('option');
+            opt.value = option;
+            opt.textContent = option;
+            dropdown.appendChild(opt);
+        });
+        
+        // Restore previous selection if it still exists
+        if (options.includes(currentValue)) {
+            dropdown.value = currentValue;
+        }
+    }
+
+    // Update job types based on current selections
+    function updateJobTypes() {
+        const selectedLanguage = languageSelect.value;
+        const selectedLocation = locationSelect.value;
+        const currentPageLang = getLanguageFromUrl();
+        
+        // Clear existing options
+        jobTypeSelect.innerHTML = '<option value="" disabled selected>' + (languages[currentPageLang]?.choose_job_type || 'Choose your job type') + '</option>';
+        
+        if (selectedLanguage && selectedLocation) {
+            // Filter jobs based on selections
+            const filteredJobs = jsonData.filter(item => 
+                item.Language === selectedLanguage && 
+                item.Location === selectedLocation
+            );
+            
+            // Get unique job types
+            const jobTypes = [...new Set(filteredJobs.map(item => item.Positions))];
+            
+            // Populate job types dropdown
+            jobTypes.forEach(job => {
+                const option = document.createElement('option');
+                option.value = job;
+                option.textContent = job;
+                jobTypeSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Generate final URL with UTM parameters
+    function generateFinalURL(baseURL, source, medium) {
+        let finalURL = new URL(baseURL);
+        let iisValue, iisnValue;
+
+        switch (medium) {
+            case 'social':
+            case 'Social':
+                iisValue = "Social Media";
+                iisnValue = `${encodeURIComponent(source).replace(/%2B/g, '+')}`;
+                break;
+            case 'Career':
+            case 'career':
+                iisValue = "Career Fair";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'digital':
+                iisValue = "Digital Ad";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'mobile':
+            case 'Mobile':
+                iisValue = "Mobile Stand";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'university':
+            case 'University':
+                iisValue = "University";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'poster':
+                iisValue = "Poster";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'flyers':
+                iisValue = "Flyers";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'physical':
+                iisValue = "Physical QR";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'FoTG':
+                iisValue = "FoTG";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'banner1':
+                iisValue = "Banner 1";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'banner2':
+                iisValue = "Banner 2";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'Email':
+                iisValue = "Email Blast";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'public':
+                iisValue = "Public Stands";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'grab':
+                iisValue = "Grab";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;            
+            case 'linkedin':
+                iisValue = "LinkedIn Recruiter";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            case 'Broadcast':
+                iisValue = "Broadcast Comms";
+                iisnValue = encodeURIComponent(source).replace(/%2B/g, '+');
+                break;
+            default:
+                console.error("Unknown utm_medium");
+                return baseURL;
+        }
+
+        finalURL.searchParams.set('mode', 'job');
+        finalURL.searchParams.set('iis', encodeURIComponent(iisValue).replace(/%20/g, '+'));
+        finalURL.searchParams.set('iisn', encodeURIComponent(iisnValue).replace(/%2B/g, '+'));
+
+        return decodeURIComponent(finalURL.toString());
+    }
+
+    // Generate QR code and show modal
+    function openQrModal(url, selectedLanguage, selectedJob) {
+        const qr = new QRious({
+            element: document.getElementById('qr-code'),
+            value: url,
+            size: 200,
+            background: 'white',
+            foreground: 'black'
+        });
+        
+        const jobUrlElement = document.getElementById('job-url');
+        jobUrlElement.href = url;
+        jobUrlElement.textContent = url;
+        
+        // Check if this is an agent position and show/hide interview step
+        const interviewStep = document.getElementById('interview-step');
+        if (isAgentPosition(selectedJob)) {
+            interviewStep.style.display = 'block';
+            const interviewUrl = getInterviewLink(selectedLanguage);
+            const interviewUrlElement = document.getElementById('interview-url');
+            interviewUrlElement.href = interviewUrl;
+        } else {
+            interviewStep.style.display = 'none';
+        }
+        
+        const qrModal = new bootstrap.Modal(document.getElementById('qrModal'));
+        qrModal.show();
+        
+        // Add QR expand functionality
+        const qrCanvas = document.getElementById('qr-code');
+        qrCanvas.onclick = function() {
+            // Create expanded QR code
+            const expandedQR = new QRious({
+                element: document.getElementById('qr-code-expanded'),
+                value: url,
+                size: 400,
+                background: 'white',
+                foreground: 'black'
+            });
+            
+            // Show expanded modal
+            const expandModal = new bootstrap.Modal(document.getElementById('qrExpandedModal'));
+            expandModal.show();
+        };
+    }
+
+    // Initialize event listeners
+    function initEventListeners() {
+        // Language dropdown change - ONLY update locations, NOT page language
+        languageSelect.addEventListener('change', function() {
+            updateLocations();
+        });
+
+        // Location dropdown change - update languages
+        locationSelect.addEventListener('change', updateLanguages);
+
+        // Generate QR button click
+        if (generateBtn) {
+            generateBtn.addEventListener('click', function() {
+                const selectedLanguage = languageSelect.value;
+                const selectedLocation = locationSelect.value;
+                const selectedJob = jobTypeSelect.value;
+                const currentPageLang = getLanguageFromUrl();
+                
+                if (!selectedLanguage || !selectedLocation || !selectedJob) {
+                    alert(languages[currentPageLang]?.select_all_options || 'Please select all options');
+                    return;
                 }
-            }
-        });
-        
-        document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
-            const key = el.getAttribute('data-translate-placeholder');
-            if (translation[key]) el.placeholder = translation[key];
-        });
-        
-        if (elements.termsContent) {
-            elements.termsContent.innerHTML = translation.termsContent;
-        }
-        
-        phoneHint.textContent = translation.phoneHint;
-        
-        populateJobDropdowns();
-        // Re-apply default values after language change
-        setDefaultValues();
-    }
-
-    function changeLanguage() {
-        currentLanguage = elements.pageLangSelect.value;
-        updatePageContent();
-    }
-
-    // Phone number validation - only allow numbers
-    elements.phoneNumber.addEventListener('input', function() {
-        this.value = this.value.replace(/[^\d]/g, '');
-        
-        if (this.value.length > 0) {
-            phoneHint.style.display = 'block';
-        } else {
-            phoneHint.style.display = 'none';
-        }
-        
-        validateForm();
-    });
-
-    function validatePhoneNumber(phone) {
-        const regex = /^\+601\d{8,9}$/;
-        return regex.test(phone);
-    }
-
-    function validateForm() {
-        let isValid = true;
-        
-        if (!elements.fullName.value.trim()) {
-            elements.fullName.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.fullName.classList.remove('is-invalid');
-        }
-        
-        if (!elements.phoneNumber.value.trim() || elements.phoneNumber.value.trim().length < 8) {
-            elements.phoneNumber.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.phoneNumber.classList.remove('is-invalid');
-        }
-        
-        if (!validateEmail(elements.email.value)) {
-            elements.email.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.email.classList.remove('is-invalid');
-        }
-        
-        if (!elements.jobLangSelect.value) {
-            elements.jobLangSelect.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.jobLangSelect.classList.remove('is-invalid');
-        }
-        
-        if (!elements.locationSelect.value) {
-            elements.locationSelect.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.locationSelect.classList.remove('is-invalid');
-        }
-        
-        if (!elements.consentCheckbox.checked) {
-            elements.consentCheckbox.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            elements.consentCheckbox.classList.remove('is-invalid');
-        }
-        
-        elements.nextBtn.disabled = !isValid;
-        return isValid;
-    }
-
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    function generateReferral() {
-        if (!validateForm()) return false;
-        
-        const name = elements.fullName.value.trim().replace(/\s+/g, '+');
-        const phone = encodeURIComponent(elements.phoneNumber.value.trim());
-        const email = encodeURIComponent(elements.email.value.trim());
-        const jobLanguage = elements.jobLangSelect.value;
-        const location = elements.locationSelect.value;
-        
-        currentLocation = location.toLowerCase().includes('malaysia') ? 'malaysia' : 
-                         location.toLowerCase().includes('thailand') ? 'thailand' : 'global';
-        
-        const job = jobData.find(
-            item => item.Language === jobLanguage && 
-                   item.Location === location
-        );
-        
-        if (job) {
-            const baseUrl = job['Evergreen link'].split('?')[0];
-            const referralUrl = `${baseUrl}?iis=xRAF&iisn=${name}%7C${phone}%7C${email}`;
-            
-            elements.referralLink.value = referralUrl;
-            generateQRCode(referralUrl);
-            updateSocialLinks();
-            return true;
-        }
-        
-        console.error('No matching job found');
-        return false;
-    }
-
-    function generateQRCode(url) {
-        QRCode.toCanvas(elements.qrCodeCanvas, url, {
-            width: 200,
-            margin: 2,
-            color: {
-                dark: '#000000',
-                light: '#ffffff'
-            }
-        }, function(error) {
-            if (error) console.error('QR Code generation error:', error);
-        });
-    }
-
-    function updateSocialLinks() {
-        elements.locationSocialLinks.innerHTML = '';
-
-        const container = document.createElement('div');
-        container.className = 'social-media-container';
-
-        const sections = [
-            { title: translations[currentLanguage].tpGlobal || 'TP Global', links: locationSocialLinks.global },
-            { title: translations[currentLanguage].followMalaysia || 'TP Malaysia', links: locationSocialLinks.malaysia },
-            { title: translations[currentLanguage].followThailand || 'TP Thailand', links: locationSocialLinks.thailand }
-        ];
-
-        sections.forEach(section => {
-            const sectionDiv = document.createElement('div');
-            sectionDiv.className = 'social-media-section';
-            
-            const title = document.createElement('h6');
-            title.textContent = section.title;
-            title.className = 'social-media-title';
-            sectionDiv.appendChild(title);
-            
-            const linksDiv = document.createElement('div');
-            linksDiv.className = 'social-media-links';
-            
-            section.links.forEach(link => {
-                const anchor = document.createElement('a');
-                anchor.href = link.url;
-                anchor.className = `social-icon ${link.icon}`;
-                anchor.target = "_blank";
-                anchor.innerHTML = `<i class="fab fa-${link.icon}"></i>`;
-                anchor.title = link.name;
-                linksDiv.appendChild(anchor);
+                
+                const jobData = jsonData.find(item => 
+                    item.Language === selectedLanguage && 
+                    item.Location === selectedLocation && 
+                    item.Positions === selectedJob
+                );
+                
+                if (jobData) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const sourceParam = urlParams.get('utm_source') || '';
+                    const mediumParam = urlParams.get('utm_medium') || '';
+                    const finalLink = generateFinalURL(jobData["Evergreen link"], sourceParam, mediumParam);
+                    openQrModal(finalLink, selectedLanguage, selectedJob);
+                } else {
+                    alert(languages[currentPageLang]?.no_job_found || 'No matching job found');
+                }
             });
-            
-            sectionDiv.appendChild(linksDiv);
-            container.appendChild(sectionDiv);
-        });
-
-        elements.locationSocialLinks.appendChild(container);
-        updateShareButtons();
-    }
-
-    function updateShareButtons() {
-        const shareUrl = encodeURIComponent(elements.referralLink.value);
-        const shareText = translations[currentLanguage]?.shareMessage || translations.en.shareMessage;
-        const encodedShareText = encodeURIComponent(shareText);
-        
-        elements.shareWhatsapp.onclick = () => {
-            window.open(`https://wa.me/?text=${encodedShareText}${shareUrl}`, '_blank');
-        };
-        
-        elements.shareLine.onclick = () => {
-            window.open(`https://social-plugins.line.me/lineit/share?url=${encodedShareText}${shareUrl}`, '_blank');
-        };
-        
-        elements.shareFacebook.onclick = () => {
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`, '_blank');
-        };
-    }
-
-    function copyToClipboard() {
-        elements.referralLink.select();
-        document.execCommand('copy');
-        
-        const originalText = elements.copyBtn.innerHTML;
-        elements.copyBtn.innerHTML = `<i class="fas fa-check"></i> ${translations[currentLanguage]?.copiedText || 'Copied!'}`;
-        setTimeout(() => {
-            elements.copyBtn.innerHTML = originalText;
-        }, 2000);
-    }
-
-    function showStep2() {
-        if (generateReferral()) {
-            elements.step1.style.display = 'none';
-            elements.step2.style.display = 'block';
-            window.scrollTo(0, 0);
         }
+
+        // Language selector dropdown items (for PAGE language)
+        document.querySelectorAll('.dropdown-item[data-lang]').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedLanguage = this.getAttribute('data-lang');
+                updateContent(selectedLanguage);
+                
+                urlParams.set('lang', selectedLanguage);
+                window.history.replaceState(null, '', `${window.location.pathname}?${urlParams.toString()}`);
+                
+                populateInitialDropdowns();
+            });
+        });
+
+        // Share buttons
+        document.getElementById('share-button-whatsapp')?.addEventListener('click', function() {
+            const url = encodeURIComponent(document.getElementById('job-url').href);
+            const text = encodeURIComponent("Check out this job opportunity at TP!");
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        });
+
+        document.getElementById('share-button-line')?.addEventListener('click', function() {
+            const url = encodeURIComponent(document.getElementById('job-url').href);
+            const text = encodeURIComponent("Check out this job opportunity at TP!");
+            window.open(`https://line.me/R/msg/text/?${text}%0A%0A${url}`, '_blank');
+        });
     }
 
-    function showStep1() {
-        elements.step2.style.display = 'none';
-        elements.step1.style.display = 'block';
-    }
-
-    function setupEventListeners() {
-        elements.pageLangSelect.addEventListener('change', changeLanguage);
-        
-        elements.fullName.addEventListener('input', validateForm);
-        elements.phoneNumber.addEventListener('input', validateForm);
-        elements.email.addEventListener('input', validateForm);
-        
-        elements.jobLangSelect.addEventListener('change', function() {
-            updateLocationsByLanguage();
-            validateForm();
-        });
-        
-        elements.locationSelect.addEventListener('change', validateForm);
-        elements.consentCheckbox.addEventListener('change', validateForm);
-        
-        elements.nextBtn.addEventListener('click', showStep2);
-        elements.backBtn.addEventListener('click', showStep1);
-        
-        elements.copyBtn.addEventListener('click', copyToClipboard);
-        
-        const termsModal = new bootstrap.Modal(elements.termsModal);
-        document.querySelector('[data-bs-target="#termsModal"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            termsModal.show();
-        });
+    // Initialize everything
+    function init() {
+        updateContent(getLanguageFromUrl());
+        loadJobData();
+        initEventListeners();
     }
 
     init();
