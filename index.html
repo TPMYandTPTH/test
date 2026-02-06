@@ -1,283 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBWBNFGJ32"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-WBWBNFGJ32');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP External RAF (Refer A Friend)</title>
-    
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9F5KMVVY8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        
-        gtag('config', 'G-T9F5KMVVY8', {
-            send_page_view: true,
-            allow_google_signals: true,
-            allow_ad_personalization_signals: true,
-            custom_map: {
-                'custom_parameter_1': 'referral_program'
-            }
-        });
-        
-        function trackCustomEvent(eventName, parameters = {}) {
-            gtag('event', eventName, {
-                event_category: 'xRAF_Program',
-                event_label: 'External_Referral',
-                ...parameters
-            });
-        }
-        
-        function trackPageEngagement() {
-            let startTime = Date.now();
-            let maxScroll = 0;
-            
-            window.addEventListener('scroll', function() {
-                let scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-                if (scrollPercent > maxScroll) {
-                    maxScroll = scrollPercent;
-                }
-            });
-            
-            window.addEventListener('beforeunload', function() {
-                let timeSpent = Math.round((Date.now() - startTime) / 1000);
-                gtag('event', 'page_engagement', {
-                    event_category: 'User_Engagement',
-                    custom_parameter_time_spent: timeSpent,
-                    custom_parameter_max_scroll: maxScroll,
-                    non_interaction: true
-                });
-            });
-        }
-        
-        document.addEventListener('DOMContentLoaded', trackPageEngagement);
-    </script>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="TP Careers - Find your perfect job opportunity with our global team">
+    <title>TP Careers</title>
     <link rel="icon" href="TPLogo11.png" type="image/png">
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-</head>
-<body>
-<div class="container py-4">
-    <div class="text-center mb-4">
-        <img src="TPLogo11.png" alt="TP Logo" class="logo img-fluid" style="max-height: 80px;">
-        <h1 class="mt-3">TP xRAF</h1>
-        <p class="lead">External Refer A Friend Program</p>
-    </div>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="styles.css" rel="stylesheet">
     
-    <!-- Main Page Countdown Display -->
-    <div class="main-countdown-container" id="mainCountdownContainer">
-        <div class="countdown-badge">
-            <div class="countdown-label">Total Rewards Available</div>
-            <div class="countdown-amount" id="mainCountdownAmount">RM20,000</div>
-            <div class="countdown-urgency">💰Limited Time Offer💰</div>
-        </div>
-    </div>
-    
-    <!-- New Button Layout -->
-    <div class="buttons-container">
-        <!-- Job Portal Button (full width) -->
-        <div class="job-portal-wrapper mb-3">
-            <a href="https://tpmyandtpth.github.io/LP/?utm_source=xRAF&utm_medium=Broadcast&utm_campaign=landing_page&lang=en" class="job-portal-btn" target="_blank" onclick="trackCustomEvent('job_portal_click', {custom_parameter_button_type: 'main_job_portal'})">
-                <i class="fas fa-briefcase"></i> <span data-translate="jobPortalText"> TP Job Portal</span>
-            </a>
-        </div>
+    <!-- Additional styles for landing page buttons -->
+    <style>
+        .landing-pages-card {
+            background-color: var(--secondary-color);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
         
-        <!-- Smaller buttons in one row -->
-        <div class="small-buttons-row">
-            <div class="dashboard-btn-wrapper">
-                <a href="https://tpmyandtpth.github.io/xRAF-Dashboard/" class="dashboard-btn" target="_blank" onclick="trackCustomEvent('dashboard_click', {custom_parameter_button_type: 'dashboard'})">
-                    <i class="fas fa-tachometer-alt"></i> <span data-translate="dashboardText">Dashboard</span>
-                </a>
-            </div>
-            <div class="employee-login-wrapper">
-                <a href="https://tpmyandtpth.github.io/RAF/" class="employee-btn" target="_blank" onclick="trackCustomEvent('employee_portal_click', {custom_parameter_button_type: 'employee_portal'})">
-                    <i class="fas fa-user-shield"></i> <span data-translate="clickHereText">TP employee!</span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="card shadow-sm mx-auto" style="max-width: 800px;">
+        .landing-pages-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .landing-page-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .landing-page-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 0.5rem;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .landing-page-btn.active:hover {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .landing-page-btn.disabled {
+            border-color: var(--dark-gray);
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        
+        .landing-page-btn.disabled:hover {
+            transform: none;
+            background-color: var(--secondary-color);
+            color: #999;
+        }
+        
+        .soon-badge {
+            background-color: #ffc107;
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .landing-page-btn i {
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .landing-page-btn {
+                font-size: 0.9rem;
+                padding: 0.875rem 1.25rem;
+            }
+            
+            .landing-page-btn span {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+    <!-- QRious Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrious@latest/dist/qrious.min.js"></script>
     
-        <div class="card shadow-sm">
-            <div class="card-body p-4">
-                <div id="step1">
-                    <div class="mb-3">
-                        <label for="page-lang-select" class="form-label" data-translate="pageLangLabel">Choose Your Language:</label>
-                        <select id="page-lang-select" class="form-select">
-                            <option value="en">English</option>
-                            <option value="ja">Japanese</option>
-                            <option value="ko">Korean</option>
-                            <option value="zh-CN">Mandarin</option>
-                            <option value="zh-HK">Cantonese</option>
-                        </select>
-                    </div>
+    <!-- Additional styles for video section -->
+    <style>
+        .video-section {
+            background-color: #f8f9fa;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            display: none; /* Hidden by default */
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container video,
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+        }
+    </style>
+</head>
 
-                    <div class="section-box mb-4">
-                        <h5 class="section-title" data-translate="yourInfoTitle">Your Information</h5>
-                        <div class="mb-3">
-                            <label for="full-name" class="form-label" data-translate="fullNameLabel">Full Name:</label>
-                            <input type="text" id="full-name" class="form-control" data-translate-placeholder="fullNamePlaceholder" required>
-                            <div class="invalid-feedback" data-translate="fullNameError">Please provide your full name.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phone-number" class="form-label" data-translate="phoneLabel">Phone Number:</label>
-                            <input type="tel" id="phone-number" class="form-control" data-translate-placeholder="phonePlaceholder" required>
-                            <div class="invalid-feedback" data-translate="phoneError">Please provide a valid phone number.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label" data-translate="emailLabel">Email Address:</label>
-                            <input type="email" id="email" class="form-control" data-translate-placeholder="emailPlaceholder" required>
-                            <div class="invalid-feedback" data-translate="emailError">Please provide a valid email address.</div>
-                        </div>
-                    </div>
-
-                    <div class="section-box mb-4">
-                        <h5 class="section-title" data-translate="friendInfoTitle">Friend's Information</h5>
-                        <div class="mb-3">
-                            <label for="job-lang-select" class="form-label" data-translate="jobLangLabel">Job Language:</label>
-                            <select id="job-lang-select" class="form-select" required>
-                                <option value="" selected disabled data-translate="selectOption">Select an option</option>
-                            </select>
-                            <div class="invalid-feedback" data-translate="jobLangError">Please select a job language.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="location-select" class="form-label" data-translate="locationLabel">Working Location:</label>
-                            <select id="location-select" class="form-select" required>
-                                <option value="" selected disabled data-translate="selectOption">Select an option</option>
-                            </select>
-                            <div class="invalid-feedback" data-translate="locationError">Please select a location.</div>
-                        </div>
-                    </div>
-
-                    <div class="consent-box mb-4 p-3 border rounded">
-                        <div class="form-check">
-                            <div class="d-flex align-items-start">
-                                <div class="me-2">
-                                    <input type="checkbox" id="consent-checkbox" class="form-check-input" required>
-                                </div>
-                                <div>
-                                    <label class="form-check-label" for="consent-checkbox">
-                                        <span data-translate="consentText1">I agree to the</span> 
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" data-translate="termsLink" onclick="trackCustomEvent('terms_conditions_view', {custom_parameter_action: 'modal_open'})">terms and conditions</a> 
-                                        <span data-translate="consentText2">of the Refer a Friend program. I confirm that I have obtained my friend's consent to share their information with TP (Teleperformance Malaysia Sdn Bhd.) for recruitment purposes.</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="invalid-feedback" data-translate="consentError">You must agree to the terms and conditions.</div>
-                        </div>
-                    </div>
-
-                    <button id="next-btn" class="btn btn-primary w-100" data-translate="nextBtn" disabled>Submit Referral</button>
-
-                    <!-- Social Media -->
-                    <div class="mt-4">
-                        <div class="row text-center">
-                            <!-- TP Global -->
-                            <div class="col-md-4 mb-3">
-                                <h5 data-translate="tpGlobal">TP Global</h5>
-                                <div class="d-flex justify-content-center gap-3">
-                                    <a href="https://www.linkedin.com/company/teleperformance" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'linkedin', custom_parameter_section: 'global'})"><i class="fab fa-linkedin"></i></a>
-                                    <a href="https://www.youtube.com/@TeleperformanceGroup" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'youtube', custom_parameter_section: 'global'})"><i class="fab fa-youtube"></i></a>
-                                    <a href="https://www.tiktok.com/@teleperformance_group" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'tiktok', custom_parameter_section: 'global'})"><i class="fab fa-tiktok"></i></a>
-                                </div>
-                            </div>
-                            <!-- TP Malaysia -->
-                            <div class="col-md-4 mb-3">
-                                <h5 data-translate="followMalaysia">TP Malaysia</h5>
-                                <div class="d-flex justify-content-center gap-3">
-                                    <a href="http://www.facebook.com/TPinMalaysia/" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'facebook', custom_parameter_section: 'malaysia'})"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="http://www.instagram.com/tp_malaysia/" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'instagram', custom_parameter_section: 'malaysia'})"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <!-- TP Thailand -->
-                            <div class="col-md-4 mb-3">
-                                <h5 data-translate="followThailand">TP Thailand</h5>
-                                <div class="d-flex justify-content-center gap-3">
-                                    <a href="http://www.facebook.com/TPinThailand/" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'facebook', custom_parameter_section: 'thailand'})"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="http://www.instagram.com/tpinthailand/" class="social-icon" target="_blank" onclick="trackCustomEvent('social_media_click', {custom_parameter_platform: 'instagram', custom_parameter_section: 'thailand'})"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="step2" style="display:none;">
-                    <button id="back-btn" class="btn btn-outline-secondary mb-3">
-                        <i class="fas fa-arrow-left me-2"></i> <span data-translate="backText">Back</span>
-                    </button>
-
-                    <h4 class="mb-3" data-translate="thankYouTitle">Thank you for your referral!</h4>
-                    <p data-translate="referralMessage">Here's the personalized link for your friend to apply:</p>
-
-                    <div class="input-group mb-3">
-                        <input type="text" id="referral-link" class="form-control" readonly>
-                        <button id="copy-btn" class="btn btn-secondary" type="button" data-translate="copyText">Copy</button>
-                    </div>
-
-                    <div class="text-center my-4">
-                        <canvas id="qr-code-canvas" class="qr-code"></canvas>
-                        <p class="mt-2" data-translate="scanText">Or scan this QR code to apply</p>
-                    </div>
-
-                    <div class="d-flex justify-content-center gap-2 mb-4 flex-wrap">
-                        <button id="share-whatsapp" class="btn btn-success mb-2">
-                            <i class="fab fa-whatsapp me-2"></i> <span data-translate="whatsappText">WhatsApp</span>
-                        </button>
-                        <button id="share-line" class="btn btn-success mb-2" style="background-color: #00B900;">
-                            <i class="fab fa-line me-2"></i> <span data-translate="lineText">Line</span>
-                        </button>
-                        <button id="share-facebook" class="btn btn-success mb-2" style="background-color: #1877F2;">
-                            <i class="fab fa-facebook-f me-2"></i> <span data-translate="facebookText">Facebook</span>
-                        </button>
-                    </div>
-
-                    <div class="mt-4 text-center">
-                        <h5 data-translate="locationSocial">Our Social Media:</h5>
-                        <div class="social-media-container" id="location-social-links"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-        <!-- Footer -->
-        <footer>
+<body>
+    <!-- Header/Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start">
-                        <p class="mb-0">© <span id="current-year"></span> TP.COM All rights reserved.</p>
+                <a class="navbar-brand" href="#">
+                    <img src="TPLogo11.png" alt="TP Logo" height="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="about_us">
+                                About Us
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/malaysia-site/malaysia/">TP Malaysia</a></li>
+                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/thailand-site/thailand/">TP Thailand</a></li>
+                                <li><a class="dropdown-item" href="https://vtour.cloud/mh2n0j/ae5772z1/#TPMYVR/">TP VR</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="careersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="careers">
+                                Careers
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="careersDropdown">
+                                <li><a class="dropdown-item" href="https://linktr.ee/TPMY_IG" id="hot-job" data-translate="hot_jobMY">Hot Job MALAYSIA 🔥</a></li>
+                                <li><a class="dropdown-item" href="https://linktr.ee/TPTH_IG" id="hot-job" data-translate="hot_jobTH">Hot Job THAILAND 🔥</a></li>
+                                <li><a class="dropdown-item" href="https://tpmyandtpth.github.io/xRAF/" data-translate="refer_friend">Refer A Friend 🌟</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="connectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="stay_connected">
+                                Stay Connected
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="connectDropdown">
+                                <li><a class="dropdown-item" href="https://www.instagram.com/tp_malaysia/"><i class="fab fa-instagram me-2"></i> TPMY Instagram</a></li>
+                                <li><a class="dropdown-item" href="https://www.facebook.com/TPinMalaysia/"><i class="fab fa-facebook-f me-2"></i> TPMY Facebook</a></li>
+                                <li><a class="dropdown-item" href="https://www.instagram.com/tpinthailand/"><i class="fab fa-instagram me-2"></i> TPTH Instagram</a></li>
+                                <li><a class="dropdown-item" href="https://www.facebook.com/p/TPinThailand/"><i class="fab fa-facebook-f me-2"></i> TPTH Facebook</a></li>
+                                <li><a class="dropdown-item" href="https://www.linkedin.com/company/teleperformance/"><i class="fab fa-linkedin me-2"></i> TP LinkedIn</a></li>
+                                <li><a class="dropdown-item" href="https://www.youtube.com/@TeleperformanceGroup/"><i class="fab fa-youtube me-2"></i> TP YouTube</a></li>
+                                <li><a class="dropdown-item" href="https://www.tiktok.com/@teleperformance_group/"><i class="fab fa-tiktok me-2"></i> TP TikTok</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link contact-us" href="https://www.tp.com/en-us/contact-us/" data-translate="contact_us">Contact Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="language">
+                                Language
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="zh">Mandarin</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="jp">Japanese</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="th">Thai</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="my">Malay</a></li>
+                                <li><a class="dropdown-item" href="#" data-lang="kr">Korean</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Video Section - Only visible when language is Thai -->
+    <section id="thai-video-section" class="video-section" style="display: none;">
+        <div class="container">
+            <h2 class="video-title">TP Thailand - ชีวิตการทำงานที่ดีที่สุด</h2>
+            <div class="video-container">
+                <!-- Replace with your actual video source -->
+                <!-- Option 1: YouTube/Vimeo Embed -->
+                <video controls width="100%" poster="TPLogo11.png">
+                    <source src="MicrosoftTeams-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Option 2: Direct Video File (uncomment and use if you have a video file) -->
+                <!-- 
+                <video controls autoplay muted loop>
+                    <source src="your-video-file.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Section -->
+    <section class="job-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="find-job-card">
+                        <h2 class="section-title" data-translate="find_job">Find your perfect job!</h2>
+                        <div class="dropdowns">
+                            <div class="mb-4">
+                                <label for="language-select" class="form-label" data-translate="preferred_language">Preferred Language</label>
+                                <select id="language-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_language">Choose your language</option>
+                                </select>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-4">
+                                <label for="location-select" class="form-label" data-translate="choose_location">Choose Your Location</label>
+                                <select id="location-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_location">Choose your location</option>
+                                </select>
+                            </div>
+                            <hr class="my-4">
+                            <div class="mb-4">
+                                <label for="job-type-select" class="form-label" data-translate="choose_job_type">Choose Your Job Type</label>
+                                <select id="job-type-select" class="form-select">
+                                    <option value="" disabled selected data-translate="choose_job_type">Choose your job type</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <button id="generate-btn" class="btn btn-primary me-3" data-translate="generate_qr">Generate QR Code & Apply Now!</button>
+                            <h5 class="mb-0" data-translate="team_response">Our team will respond within <span class="highlighted-word">48 hours!</span></h5>
+                        </div>
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <p class="mb-0">#MoreTogether</p>
+                </div>
+                
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="landing-pages-card">
+                        <h2 class="section-title" data-translate="language_pages">Language-Specific Pages</h2>
+                        <p class="mb-4" data-translate="language_pages_desc">Explore our dedicated landing pages for each language</p>
+                        
+                        <div class="landing-page-buttons">
+                            <!-- Japanese Landing Page - Active -->
+                            <a href="https://tpmyandtpth.github.io/JLP" class="landing-page-btn active" target="_blank">
+                                <i class="fas fa-globe me-2"></i>
+                                <span>日本語ランディングページ</span>
+                            </a>
+                            
+                            <!-- Mandarin Landing Page - Active -->
+                            <a href="https://tpmyandtpth.github.io/MLP" class="landing-page-btn active" target="_blank">
+                                <i class="fas fa-globe me-2"></i>
+                                <span>中文招聘页面</span>
+                            </a>
+                            
+                            <!-- Korean Landing Page - Coming Soon -->
+                            <button class="landing-page-btn disabled" disabled>
+                                <i class="fas fa-globe me-2"></i>
+                                <span>한국어 랜딩 페이지</span>
+                                <span class="soon-badge">Soon</span>
+                            </button>
+                            
+                            <!-- Thai Landing Page - Coming Soon -->
+                            <button class="landing-page-btn disabled" disabled>
+                                <i class="fas fa-globe me-2"></i>
+                                <span>หน้าแลนดิ้งภาษาไทย</span>
+                                <span class="soon-badge">Soon</span>
+                            </button>
+                            
+                            <!-- English Landing Page - Coming Soon -->
+                            <button class="landing-page-btn disabled" disabled>
+                                <i class="fas fa-globe me-2"></i>
+                                <span>English Landing Page</span>
+                                <span class="soon-badge">Soon</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-    
-    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">© <span id="current-year"></span> TP.COM All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0">#MoreTogether</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Modal -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="termsModalLabel" data-translate="termsTitle">Terms and Conditions</h5>
+                    <h5 class="modal-title" id="qrModalLabel" data-translate="scan_to_apply">Scan to Apply</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="termsContent"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="closeBtn">Close</button>
+                <div class="modal-body">
+                    <!-- Step 1: Apply -->
+                    <div class="application-step">
+                        <div class="step-header">
+                            <div class="step-number">1</div>
+                            <h4 class="step-title" data-translate="step_one">Submit Your Application</h4>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description" data-translate="step_one_desc">Click the link below or scan the QR code to apply for this position</p>
+                            <!-- URL on first line -->
+                            <div class="mb-3">
+                                <a id="job-url" href="#" target="_blank" rel="noopener" class="btn btn-apply d-block text-break">
+                                    <i class="fas fa-external-link-alt me-2"></i>
+                                    <span data-translate="apply_online">Apply Online Now</span>
+                                </a>
+                            </div>
+                            <!-- QR Code on separate line -->
+                            <div class="qr-section">
+                                <p class="qr-label mb-2" data-translate="or_scan">Or scan QR</p>
+                                <canvas id="qr-code" class="qr-canvas" style="cursor: pointer;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Book Interview (Only for agent positions) -->
+                    <div id="interview-step" class="application-step" style="display: none;">
+                        <div class="step-header">
+                            <div class="step-number">2</div>
+                            <h4 class="step-title" data-translate="step_two">Book Your Interview</h4>
+                        </div>
+                        <div class="step-content">
+                            <p class="step-description" data-translate="step_two_desc">After submitting your application, schedule your interview at your convenience</p>
+                            <a id="interview-url" href="#" target="_blank" rel="noopener" class="btn btn-interview">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                <span data-translate="book_interview">Schedule Interview Now</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Share Section -->
+                    <div class="share-section mt-4">
+                        <h6 class="share-title" data-translate="share_via">Share Via</h6>
+                        <div class="share-buttons">
+                            <button id="share-button-whatsapp" class="share-btn" aria-label="Share on WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </button>
+                            <button id="share-button-line" class="share-btn" aria-label="Share on Line">
+                                <i class="fab fa-line"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- QR Expanded Modal (for clicking to expand) -->
+    <div class="modal fade" id="qrExpandedModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-translate="scan_to_apply">Scan to Apply</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <canvas id="qr-code-expanded" class="qr-canvas-expanded"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="translations.js"></script>
+    <!-- Custom JS (use the fixed version) -->
     <script src="script.js"></script>
 </body>
 </html>
