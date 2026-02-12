@@ -1,422 +1,479 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBWBNFGJ32"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WBWBNFGJ32');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TP Careers - Find your perfect job opportunity with our global team">
-    <title>TP Careers</title>
-    <link rel="icon" href="TPLogo11.png" type="image/png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="styles.css" rel="stylesheet">
-    
-    <!-- Additional styles for landing page buttons -->
-    <style>
-        .landing-pages-card {
-            background-color: var(--secondary-color);
-            border-radius: 0.5rem;
-            padding: 2rem;
-            height: 100%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-        }
-        
-        .landing-pages-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .landing-page-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .landing-page-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.5rem;
-            border: 2px solid var(--primary-color);
-            border-radius: 0.5rem;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all var(--transition-speed) ease;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .landing-page-btn.active:hover {
-            background-color: var(--primary-color);
-            color: var(--secondary-color);
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .landing-page-btn.disabled {
-            border-color: var(--dark-gray);
-            color: #999;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-        
-        .landing-page-btn.disabled:hover {
-            transform: none;
-            background-color: var(--secondary-color);
-            color: #999;
-        }
-        
-        .soon-badge {
-            background-color: #ffc107;
-            color: #000;
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .landing-page-btn i {
-            font-size: 1.1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .landing-page-btn {
-                font-size: 0.9rem;
-                padding: 0.875rem 1.25rem;
-            }
-            
-            .landing-page-btn span {
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-    <!-- QRious Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrious@latest/dist/qrious.min.js"></script>
-    
-    <!-- Additional styles for video section -->
-    <style>
-        .video-section {
-            background-color: #f8f9fa;
-            padding: 3rem 0;
-            margin-bottom: 2rem;
-            display: none; /* Hidden by default */
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            overflow: hidden;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-container video,
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .video-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #000;
-        }
-    </style>
-</head>
+---
+title: "TP 华语招聘 | Teleperformance 马来西亚/泰国"
+description: "Teleperformance 华语招聘官网 - 马来西亚和泰国华语职位，提供签证支持、搬迁补贴和有竞争力的薪酬。"
+---
 
-<body>
-    <!-- Header/Navbar -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light py-3">
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    <img src="TPLogo11.png" alt="TP Logo" height="40">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="about_us">
-                                About Us
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/malaysia-site/malaysia/">TP Malaysia</a></li>
-                                <li><a class="dropdown-item" href="https://www.tp.com/en-us/locations/thailand-site/thailand/">TP Thailand</a></li>
-                                <li><a class="dropdown-item" href="https://vtour.cloud/mh2n0j/ae5772z1/#TPMYVR/">TP VR</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="careersDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="careers">
-                                Careers
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="careersDropdown">
-                                <li><a class="dropdown-item" href="https://linktr.ee/TPMY_IG" id="hot-job" data-translate="hot_jobMY">Hot Job MALAYSIA 🔥</a></li>
-                                <li><a class="dropdown-item" href="https://linktr.ee/TPTH_IG" id="hot-job" data-translate="hot_jobTH">Hot Job THAILAND 🔥</a></li>
-                                <li><a class="dropdown-item" href="https://tpmyandtpth.github.io/xRAF/" data-translate="refer_friend">Refer A Friend 🌟</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="connectDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="stay_connected">
-                                Stay Connected
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="connectDropdown">
-                                <li><a class="dropdown-item" href="https://www.instagram.com/tp_malaysia/"><i class="fab fa-instagram me-2"></i> TPMY Instagram</a></li>
-                                <li><a class="dropdown-item" href="https://www.facebook.com/TPinMalaysia/"><i class="fab fa-facebook-f me-2"></i> TPMY Facebook</a></li>
-                                <li><a class="dropdown-item" href="https://www.instagram.com/tpinthailand/"><i class="fab fa-instagram me-2"></i> TPTH Instagram</a></li>
-                                <li><a class="dropdown-item" href="https://www.facebook.com/p/TPinThailand/"><i class="fab fa-facebook-f me-2"></i> TPTH Facebook</a></li>
-                                <li><a class="dropdown-item" href="https://www.linkedin.com/company/teleperformance/"><i class="fab fa-linkedin me-2"></i> TP LinkedIn</a></li>
-                                <li><a class="dropdown-item" href="https://www.youtube.com/@TeleperformanceGroup/"><i class="fab fa-youtube me-2"></i> TP YouTube</a></li>
-                                <li><a class="dropdown-item" href="https://www.tiktok.com/@teleperformance_group/"><i class="fab fa-tiktok me-2"></i> TP TikTok</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link contact-us" href="https://www.tp.com/en-us/contact-us/" data-translate="contact_us">Contact Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-translate="language">
-                                Language
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                                <li><a class="dropdown-item" href="#" data-lang="en">English</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="zh">Mandarin</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="jp">Japanese</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="th">Thai</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="my">Malay</a></li>
-                                <li><a class="dropdown-item" href="#" data-lang="kr">Korean</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+<!-- ========================================
+     HERO SECTION - Typewriter Effect
+     ======================================== -->
+<section class="hero-light">
+  <div class="hero-container">
+    <h1>
+      <span id="typewriter" class="typewriter-text"
+            data-texts-local='{{ site.data.homepage.hero.rotating_text.local | jsonify }}'
+            data-texts-expat='{{ site.data.homepage.hero.rotating_text.expat | jsonify }}'>
+      </span>
+    </h1>
+    <p class="hero-subtitle">
+      <span class="local-only">{{ site.data.homepage.hero.subtitle.local }}</span>
+      <span class="expat-only">{{ site.data.homepage.hero.subtitle.expat }}</span>
+    </p>
+    <div class="hero-cta">
+      <a href="{{ site.icims_search }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+         onclick="trackCustomEvent('apply_click', {button_name: 'Hero Apply'})">
+        <span class="local-only">Apply Now 立即申请</span>
+        <span class="expat-only">立即申请</span>
+      </a>
+      <a href="{{ site.ai_assessment_form }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+        <span class="local-only">🤖 AI Assessment</span>
+        <span class="expat-only">🤖 AI 能力评估</span>
+      </a>
+    </div>
+    <div class="hero-stats">
+      {% for stat in site.data.homepage.hero.stats %}
+      <div class="stat-item">
+        <span class="stat-number">{{ stat.number }}</span>
+        <span class="stat-label">
+          <span class="local-only">{{ stat.label.local }}</span>
+          <span class="expat-only">{{ stat.label.expat }}</span>
+        </span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-    <!-- Video Section - Only visible when language is Thai -->
-    <section id="thai-video-section" class="video-section" style="display: none;">
-        <div class="container">
-            <h2 class="video-title">TP Thailand - ชีวิตการทำงานที่ดีที่สุด</h2>
-            <div class="video-container">
-                <!-- Replace with your actual video source -->
-                <!-- Option 1: YouTube/Vimeo Embed -->
-                <video controls width="100%" poster="TPLogo11.png">
-                    <source src="MicrosoftTeams-video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                
-                <!-- Option 2: Direct Video File (uncomment and use if you have a video file) -->
-                <!-- 
-                <video controls autoplay muted loop>
-                    <source src="your-video-file.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                -->
-            </div>
+<!-- ========================================
+     SOCIAL PROOF BANNER
+     ======================================== -->
+<div class="social-proof-banner">
+  <div class="social-proof-inner">
+    {% for item in site.data.homepage.social_proof %}
+    <div class="proof-item">
+      <span class="number">{{ item.number }}</span>
+      <span class="local-only">{{ item.text.local }}</span>
+      <span class="expat-only">{{ item.text.expat }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ========================================
+     ABOUT SECTION
+     ======================================== -->
+<section class="section-padded" id="about">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">关于 Teleperformance</span>
+      <span class="expat-only">关于 Teleperformance</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="local-only">全球领先的 BPO 企业，世界500强</span>
+      <span class="expat-only">全球领先的业务流程外包企业，世界500强</span>
+    </p>
+  </div>
+</section>
+
+<!-- ========================================
+     GPTW ANNOUNCEMENT
+     ======================================== -->
+<section class="section" style="max-width: var(--max); padding: 0 20px;">
+  <div class="gptw-announcement animate-on-scroll">
+    <h2>
+      <span class="local-only">🏆 连续 <span class="gptw-counter" data-target="{{ site.data.sections.gptw.years_count }}">1</span> 年入选 World's Best Workplaces™</span>
+      <span class="expat-only">🏆 连续 <span class="gptw-counter" data-target="{{ site.data.sections.gptw.years_count }}">1</span> 年入选全球最佳雇主™</span>
+    </h2>
+    <p>
+      <span class="local-only">Great Place to Work® 认证</span>
+      <span class="expat-only">Great Place to Work® 认证</span>
+    </p>
+    {% if site.data.sections.gptw.gallery.size > 0 %}
+    <div class="gptw-gallery">
+      {% for img in site.data.sections.gptw.gallery %}
+      <img src="{{ '/assets/images/' | append: img | relative_url }}" alt="GPTW {{ forloop.index }}" loading="lazy">
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ========================================
+     COMMUNITY STATS (4-column)
+     ======================================== -->
+<div class="community-stats animate-on-scroll">
+  {% for stat in site.data.homepage.community_stats %}
+  <div class="stat-card">
+    <div class="stat-icon">{{ stat.icon }}</div>
+    <div class="stat-number">{{ stat.number }}</div>
+    <div class="stat-label">
+      <span class="local-only">{{ stat.label.local }}</span>
+      <span class="expat-only">{{ stat.label.expat }}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- ========================================
+     PRIORITY MENU (12 Cards with emoji watermarks)
+     ======================================== -->
+<section class="priority-menu" id="explore">
+  <div class="section-inner">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">探索 TP 华语招聘</span>
+      <span class="expat-only">探索 TP 华语招聘</span>
+    </h2>
+    <p class="section-subtitle">
+      <span class="local-only">点击了解更多</span>
+      <span class="expat-only">点击了解更多</span>
+    </p>
+    <div class="cards-grid">
+      {% for card in site.data.homepage.priority_cards %}
+      <a href="{{ card.url | relative_url }}" class="card-link" data-emoji="{{ card.emoji }}"
+         {% if card.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+        <div class="card-image-wrapper">
+          <img src="{{ '/assets/images/' | append: card.image | relative_url }}" alt="{{ card.title.local }}" loading="lazy">
         </div>
-    </section>
-
-    <!-- Job Section -->
-    <section class="job-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="find-job-card">
-                        <h2 class="section-title" data-translate="find_job">Find your perfect job!</h2>
-                        <div class="dropdowns">
-                            <div class="mb-4">
-                                <label for="language-select" class="form-label" data-translate="preferred_language">Preferred Language</label>
-                                <select id="language-select" class="form-select">
-                                    <option value="" disabled selected data-translate="choose_language">Choose your language</option>
-                                </select>
-                            </div>
-                            <hr class="my-4">
-                            <div class="mb-4">
-                                <label for="location-select" class="form-label" data-translate="choose_location">Choose Your Location</label>
-                                <select id="location-select" class="form-select">
-                                    <option value="" disabled selected data-translate="choose_location">Choose your location</option>
-                                </select>
-                            </div>
-                            <hr class="my-4">
-                            <div class="mb-4">
-                                <label for="job-type-select" class="form-label" data-translate="choose_job_type">Choose Your Job Type</label>
-                                <select id="job-type-select" class="form-select">
-                                    <option value="" disabled selected data-translate="choose_job_type">Choose your job type</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center mt-4">
-                            <button id="generate-btn" class="btn btn-primary me-3" data-translate="generate_qr">Generate QR Code & Apply Now!</button>
-                            <h5 class="mb-0" data-translate="team_response">Our team will respond within <span class="highlighted-word">48 hours!</span></h5>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <div class="landing-pages-card">
-                        <h2 class="section-title" data-translate="language_pages">Language-Specific Pages</h2>
-                        <p class="mb-4" data-translate="language_pages_desc">Explore our dedicated landing pages for each language</p>
-                        
-                        <div class="landing-page-buttons">
-                            <!-- Japanese Landing Page - Active -->
-                            <a href="https://tpmyandtpth.github.io/JLP" class="landing-page-btn active" target="_blank">
-                                <i class="fas fa-globe me-2"></i>
-                                <span>日本語ランディングページ</span>
-                            </a>
-                            
-                            <!-- Mandarin Landing Page - Active -->
-                            <a href="https://tpmyandtpth.github.io/MLP" class="landing-page-btn active" target="_blank">
-                                <i class="fas fa-globe me-2"></i>
-                                <span>中文招聘页面</span>
-                            </a>
-                            
-                            <!-- Korean Landing Page - Coming Soon -->
-                            <button class="landing-page-btn disabled" disabled>
-                                <i class="fas fa-globe me-2"></i>
-                                <span>한국어 랜딩 페이지</span>
-                                <span class="soon-badge">Soon</span>
-                            </button>
-                            
-                            <!-- Thai Landing Page - Coming Soon -->
-                            <button class="landing-page-btn disabled" disabled>
-                                <i class="fas fa-globe me-2"></i>
-                                <span>หน้าแลนดิ้งภาษาไทย</span>
-                                <span class="soon-badge">Soon</span>
-                            </button>
-                            
-                            <!-- English Landing Page - Coming Soon -->
-                            <button class="landing-page-btn disabled" disabled>
-                                <i class="fas fa-globe me-2"></i>
-                                <span>English Landing Page</span>
-                                <span class="soon-badge">Soon</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="card-content">
+          <h3>
+            <span class="local-only">{{ card.title.local }}</span>
+            <span class="expat-only">{{ card.title.expat }}</span>
+          </h3>
+          <p>
+            <span class="local-only">{{ card.desc.local }}</span>
+            <span class="expat-only">{{ card.desc.expat }}</span>
+          </p>
         </div>
-    </section>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">© <span id="current-year"></span> TP.COM All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">#MoreTogether</p>
-                </div>
-            </div>
+<!-- ========================================
+     ICON GRID (16 items)
+     ======================================== -->
+<section class="section-padded">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title">
+      <span class="local-only">为什么选择 TP</span>
+      <span class="expat-only">为什么选择 TP</span>
+    </h2>
+    <div class="icon-grid">
+      {% for item in site.data.sections.icon_grid %}
+      <div class="icon-item">
+        <div class="icon-emoji">{{ item.icon }}</div>
+        <div class="icon-label">{{ item.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     SOCIAL CONNECT (4 cards)
+     ======================================== -->
+<section class="section-padded" style="background: var(--tp-off);">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">关注我们</span>
+      <span class="expat-only">关注我们</span>
+    </h2>
+    <div class="social-grid">
+      {% for social in site.data.sections.social_connect %}
+      <div class="social-card">
+        <div class="social-icon">{{ social.icon }}</div>
+        <div class="social-name">{{ social.platform }}</div>
+        <div class="social-desc">
+          <span class="local-only">{{ social.desc.local }}</span>
+          <span class="expat-only">{{ social.desc.expat }}</span>
         </div>
-    </footer>
+        {% if social.qr_image %}
+        <img src="{{ '/assets/images/' | append: social.qr_image | relative_url }}" alt="{{ social.platform }} QR" loading="lazy">
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-    <!-- QR Modal -->
-    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="qrModalLabel" data-translate="scan_to_apply">Scan to Apply</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Step 1: Apply -->
-                    <div class="application-step">
-                        <div class="step-header">
-                            <div class="step-number">1</div>
-                            <h4 class="step-title" data-translate="step_one">Submit Your Application</h4>
-                        </div>
-                        <div class="step-content">
-                            <p class="step-description" data-translate="step_one_desc">Click the link below or scan the QR code to apply for this position</p>
-                            <!-- URL on first line -->
-                            <div class="mb-3">
-                                <a id="job-url" href="#" target="_blank" rel="noopener" class="btn btn-apply d-block text-break">
-                                    <i class="fas fa-external-link-alt me-2"></i>
-                                    <span data-translate="apply_online">Apply Online Now</span>
-                                </a>
-                            </div>
-                            <!-- QR Code on separate line -->
-                            <div class="qr-section">
-                                <p class="qr-label mb-2" data-translate="or_scan">Or scan QR</p>
-                                <canvas id="qr-code" class="qr-canvas" style="cursor: pointer;"></canvas>
-                            </div>
-                        </div>
-                    </div>
+<!-- ========================================
+     WORLD MAP
+     ======================================== -->
+<section class="world-map animate-on-scroll">
+  <img src="{{ '/assets/images/world-map.png' | relative_url }}" alt="TP 全球分布" loading="lazy">
+</section>
 
-                    <!-- Step 2: Book Interview (Only for agent positions) -->
-                    <div id="interview-step" class="application-step" style="display: none;">
-                        <div class="step-header">
-                            <div class="step-number">2</div>
-                            <h4 class="step-title" data-translate="step_two">Book Your Interview</h4>
-                        </div>
-                        <div class="step-content">
-                            <p class="step-description" data-translate="step_two_desc">After submitting your application, schedule your interview at your convenience</p>
-                            <a id="interview-url" href="#" target="_blank" rel="noopener" class="btn btn-interview">
-                                <i class="fas fa-calendar-check me-2"></i>
-                                <span data-translate="book_interview">Schedule Interview Now</span>
-                            </a>
-                        </div>
-                    </div>
+<!-- ========================================
+     OFFICES (9 cards, incl. coming-soon)
+     ======================================== -->
+<section class="section-padded" id="offices">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">我们的 Offices</span>
+      <span class="expat-only">我们的办公地点</span>
+    </h2>
+    <div class="offices-grid">
+      {% for office in site.data.offices.offices %}
+      <div class="office-card{% if office.coming_soon %} coming-soon{% endif %}">
+        <h3 class="office-name">
+          {% if office.name_local %}
+            <span class="local-only">{{ office.name_local }}</span>
+            <span class="expat-only">{{ office.name_expat }}</span>
+          {% else %}
+            {{ office.name }}
+          {% endif %}
+        </h3>
+        <ul class="office-features">
+          {% for feat in office.features.local %}
+          <li class="local-only">{{ feat }}</li>
+          {% endfor %}
+          {% for feat in office.features.expat %}
+          <li class="expat-only">{{ feat }}</li>
+          {% endfor %}
+        </ul>
+        {% if office.map_url %}
+        <a href="{{ office.map_url }}" target="_blank" rel="noopener noreferrer" class="office-map-btn">📍 Google Maps</a>
+        {% endif %}
+        {% if office.apply_url %}
+        <a href="{{ office.apply_url }}" target="_blank" rel="noopener noreferrer" class="office-map-btn">{{ office.apply_label | default: "💼 Apply Now" }}</a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
-                    <!-- Share Section -->
-                    <div class="share-section mt-4">
-                        <h6 class="share-title" data-translate="share_via">Share Via</h6>
-                        <div class="share-buttons">
-                            <button id="share-button-whatsapp" class="share-btn" aria-label="Share on WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
-                            </button>
-                            <button id="share-button-line" class="share-btn" aria-label="Share on Line">
-                                <i class="fab fa-line"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ========================================
+     LIFESTYLE GRID (8 items)
+     ======================================== -->
+<section class="section-padded" style="background: var(--tp-off);">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title">
+      <span class="local-only">Life in 马来西亚 & 泰国</span>
+      <span class="expat-only">马来西亚和泰国的生活</span>
+    </h2>
+    <div class="lifestyle-grid">
+      {% for item in site.data.sections.lifestyle %}
+      <div class="lifestyle-item">
+        <img src="{{ '/assets/images/' | append: item.image | relative_url }}" alt="{{ item.label.local }}" loading="lazy">
+        <div class="lifestyle-label">
+          <span class="local-only">{{ item.label.local }}</span>
+          <span class="expat-only">{{ item.label.expat }}</span>
         </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     VIDEOS (4 YouTube embeds)
+     ======================================== -->
+<section class="section-padded" id="videos">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">看看 TP 的生活</span>
+      <span class="expat-only">看看 TP 的生活</span>
+    </h2>
+    <div class="videos-grid">
+      {% for video in site.data.sections.videos %}
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/{{ video.id }}" title="{{ video.title.local }}" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-title">
+          <span class="local-only">{{ video.title.local }}</span>
+          <span class="expat-only">{{ video.title.expat }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     BENEFITS (6 items)
+     ======================================== -->
+<section class="section-padded" style="background: var(--tp-off);" id="benefits">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">福利 Benefits</span>
+      <span class="expat-only">福利待遇</span>
+    </h2>
+    <div class="grid-3">
+      {% for benefit in site.data.sections.benefits %}
+      <div class="card animate-on-scroll">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">{{ benefit.icon }}</div>
+        <h3>
+          <span class="local-only">{{ benefit.title.local }}</span>
+          <span class="expat-only">{{ benefit.title.expat }}</span>
+        </h3>
+        <p>
+          <span class="local-only">{{ benefit.desc.local }}</span>
+          <span class="expat-only">{{ benefit.desc.expat }}</span>
+        </p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     INTERVIEW PROCESS (5-step rail)
+     ======================================== -->
+<section class="section-padded" id="process">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">Hiring Process 面试流程</span>
+      <span class="expat-only">招聘流程</span>
+    </h2>
+    <ol class="process-rail">
+      {% for step in site.data.sections.interview_process %}
+      <li class="step-card">
+        <div class="step-head">
+          <span class="step-dot">{{ step.step }}</span>
+          <span class="step-title">
+            <span class="local-only">{{ step.title.local }}</span>
+            <span class="expat-only">{{ step.title.expat }}</span>
+          </span>
+        </div>
+        <p class="step-desc">
+          <span class="local-only">{{ step.desc.local }}</span>
+          <span class="expat-only">{{ step.desc.expat }}</span>
+        </p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- ========================================
+     TA TEAM SECTION
+     ======================================== -->
+<section class="section-padded" style="background: var(--tp-off);" id="team">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">招聘团队 TA Team</span>
+      <span class="expat-only">招聘团队</span>
+    </h2>
+
+    <!-- Leader -->
+    {% assign leader = site.data.team.leader %}
+    <div class="ta-leader-card animate-on-scroll">
+      {% if leader.avatar != "" %}
+      <img src="{{ '/assets/images/' | append: leader.avatar | relative_url }}" alt="{{ leader.name_en }}">
+      {% else %}
+      <div class="member-placeholder">👤</div>
+      {% endif %}
+      <div>
+        <div style="font-weight: 700; font-size: 1.1rem;">{{ leader.name_en }}</div>
+        <div style="color: var(--tp-gray);">{{ leader.name_cn }}</div>
+        <div style="font-size: 0.85rem; color: var(--gold-dark);">
+          <span class="local-only">{{ leader.title.local }}</span>
+          <span class="expat-only">{{ leader.title.expat }}</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--tp-gray-dark); margin-top: 0.5rem; line-height: 1.6;">
+          <span class="local-only">{{ leader.bio.local }}</span>
+          <span class="expat-only">{{ leader.bio.expat }}</span>
+        </p>
+      </div>
     </div>
 
-    <!-- QR Expanded Modal (for clicking to expand) -->
-    <div class="modal fade" id="qrExpandedModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" data-translate="scan_to_apply">Scan to Apply</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <canvas id="qr-code-expanded" class="qr-canvas-expanded"></canvas>
-                </div>
-            </div>
-        </div>
+    <!-- Members -->
+    <div class="ta-members-grid">
+      {% for member in site.data.team.members %}
+      <div class="ta-member-card animate-on-scroll">
+        {% if member.avatar != "" %}
+        <img src="{{ '/assets/images/' | append: member.avatar | relative_url }}" alt="{{ member.name_en }}">
+        {% else %}
+        <div class="member-placeholder">👤</div>
+        {% endif %}
+        <div class="member-name">{{ member.name_en }}</div>
+        <div class="member-cn">{{ member.name_cn }}</div>
+        {% if member.show_linkedin and member.linkedin %}
+        <a href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" class="ta-linkedin-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+          LinkedIn
+        </a>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
+  </div>
+</section>
 
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JS (use the fixed version) -->
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- ========================================
+     FAQ SECTION
+     ======================================== -->
+<section class="section-padded" id="faq">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title section-title-decorated">
+      <span class="local-only">FAQ 常见问题</span>
+      <span class="expat-only">常见问题</span>
+    </h2>
+    <div style="max-width: 800px; margin: 0 auto;">
+      {% for faq in site.data.sections.faq %}
+      <div class="faq-item">
+        <div class="faq-question">
+          <span class="local-only">{{ faq.q.local }}</span>
+          <span class="expat-only">{{ faq.q.expat }}</span>
+        </div>
+        <div class="faq-answer">
+          <p>
+            <span class="local-only">{{ faq.a.local }}</span>
+            <span class="expat-only">{{ faq.a.expat }}</span>
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     CONTACT CTA
+     ======================================== -->
+<section class="section-padded" style="background: var(--tp-black); color: var(--tp-white);">
+  <div class="section" style="max-width: var(--max);">
+    <h2 class="section-title" style="color: var(--gold-primary);">
+      <span class="local-only">Ready? 联系我们</span>
+      <span class="expat-only">准备好了吗？联系我们</span>
+    </h2>
+    <div class="contact-grid">
+      <a href="{{ site.icims_search }}" target="_blank" rel="noopener noreferrer" class="contact-card"
+         onclick="trackCustomEvent('apply_click', {button_name: 'CTA Apply'})">
+        <span class="contact-icon">💼</span>
+        <span class="contact-text">
+          <span class="local-only">Apply Now</span>
+          <span class="expat-only">立即申请</span>
+        </span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="{{ site.ai_assessment_form }}" target="_blank" rel="noopener noreferrer" class="contact-card"
+         onclick="trackCustomEvent('ai_assessment_click', {button_name: 'CTA AI Assessment'})">
+        <span class="contact-icon">🤖</span>
+        <span class="contact-text">
+          <span class="local-only">AI Assessment</span>
+          <span class="expat-only">AI 能力评估</span>
+        </span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="{{ site.recruiter_booking_url }}" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon">📅</span>
+        <span class="contact-text">
+          <span class="local-only">Book Recruiter</span>
+          <span class="expat-only">预约招聘顾问</span>
+        </span>
+        <span class="contact-arrow">→</span>
+      </a>
+      <a href="{{ site.xraf_url }}" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <span class="contact-icon">🎁</span>
+        <span class="contact-text">
+          <span class="local-only">推荐好友 xRAF</span>
+          <span class="expat-only">推荐好友奖励</span>
+        </span>
+        <span class="contact-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
